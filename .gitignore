@@ -44,7 +44,7 @@ app.*.symbols
 # Obfuscation related
 app.*.map.json
 
-# Project(Booknote) related
+# Project related
 # API
 **/lib/**/api_key.dart
 
