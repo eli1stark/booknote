@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'components/app_bar.dart';
-import 'components/book_frame.dart';
-
+import 'components/appbar/app_bar.dart';
+import 'components/book_box/book_box.dart';
 
 class BookArgument {
   BookArgument(this.path);
@@ -34,7 +33,7 @@ class _BookState extends State<Book> {
       ),
       body: Stack(
         children: <Widget>[
-          BookFrame(size: size, imgSrc: arg.path),
+          BookBox(imgSrc: arg.path),
           DraggableScrollableSheet(
             initialChildSize: 0.56,
             minChildSize: 0.56,
@@ -53,7 +52,9 @@ class _BookState extends State<Book> {
                     topRight: Radius.circular(30.0),
                   ),
                   border: Border.all(
-                      color: Colors.grey[500].withOpacity(0.3), width: 1.0),
+                    color: Colors.grey[500].withOpacity(0.3),
+                    width: 1.0,
+                  ),
                 ),
                 child: ListView(
                   controller: scrollController,
