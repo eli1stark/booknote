@@ -1,14 +1,14 @@
-import 'package:booknote/models/categories.dart';
-import 'package:booknote/screens/search/search.dart';
-import 'package:booknote/services/database/database.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'screens/emoji_picker/emoji_picker.dart';
-import 'theme/scroll_behavior.dart';
-import 'screens/bookshelf/bookshelf.dart';
-import 'screens/book/book.dart';
-import 'screens/categories/categories.dart';
-import 'screens/test.dart';
+import 'domain/categories.dart';
+import 'infrastructure/database/database.dart';
+import 'presentation/global/theme/scroll_behavior.dart';
+import 'presentation/local/emoji_picker/emoji_picker.dart';
+import 'presentation/local/bookshelf/bookshelf.dart';
+import 'presentation/local/book/book.dart';
+import 'presentation/local/categories/categories.dart';
+import 'presentation/local/search/search.dart';
+import 'presentation/test.dart';
 import 'package:provider/provider.dart';
 
 void main() {
