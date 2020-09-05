@@ -2,7 +2,6 @@ import 'package:booknote/infrastructure/api/methods_api.dart';
 import 'package:booknote/infrastructure/database/database.dart';
 import 'package:booknote/presentation/local/bookshelf/bookshelf.dart';
 import 'package:flutter/material.dart';
-
 import '../../utils.dart';
 
 class AddBookForm extends StatefulWidget {
@@ -139,4 +138,4 @@ class _AddBookFormState extends State<AddBookForm> {
 // TODO prompt user that book is already added if it is. and pop back to search
 // id validatation ->
 // TODO clear search result when added book
-// I probably need notify listeners, to norify search page about value from this page
+// I probably need notify listeners, to notify search page about value from this page

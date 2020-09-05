@@ -13,6 +13,7 @@ class DeleteBookButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FlatButton(
+      splashColor: Colors.grey[200],
       child: Text(
         text,
         style: TextStyle(

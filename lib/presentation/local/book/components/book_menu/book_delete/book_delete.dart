@@ -1,4 +1,4 @@
-import '../../../bookshelf/bookshelf.dart';
+import 'package:booknote/presentation/local/bookshelf/bookshelf.dart';
 import 'package:flutter/material.dart';
 import 'components/delete_button.dart';
 
@@ -18,15 +18,15 @@ AlertDialog deleteBookDialog(BuildContext context) {
     ),
     actions: [
       DeleteBookButton(
+        text: 'Cancel',
+        onPressed: () => Navigator.pop(context),
+      ),
+      DeleteBookButton(
         text: 'Yes',
         onPressed: () {
           // TODO delete the book from Firestore
           Navigator.pushNamed(context, Bookshelf.routeName);
         },
-      ),
-      DeleteBookButton(
-        text: 'No',
-        onPressed: () => Navigator.pop(context),
       ),
     ],
   );
