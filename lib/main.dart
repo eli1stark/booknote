@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'domain/categories.dart';
 import 'infrastructure/database/database.dart';
 import 'presentation/global/theme/scroll_behavior.dart';
+import 'presentation/local/book/components/book_menu/book_cover/book_cover.dart';
 import 'presentation/local/emoji_picker/emoji_picker.dart';
 import 'presentation/local/bookshelf/bookshelf.dart';
 import 'presentation/local/book/book.dart';
@@ -52,6 +53,7 @@ class Booknote extends StatelessWidget {
           Categories.routeName: (context) => Categories(),
           EmojiPicker.routeName: (context) => EmojiPicker(),
           Search.routeName: (context) => Search(),
+          BookCover.routeName: (context) => BookCover(),
         },
       ),
     );
