@@ -8,7 +8,6 @@ import 'presentation/local/bookshelf/bookshelf.dart';
 import 'presentation/local/book/book.dart';
 import 'presentation/local/categories/categories.dart';
 import 'presentation/local/search/search.dart';
-import 'presentation/test.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -53,7 +52,6 @@ class Booknote extends StatelessWidget {
           Categories.routeName: (context) => Categories(),
           EmojiPicker.routeName: (context) => EmojiPicker(),
           Search.routeName: (context) => Search(),
-          '/test': (context) => Test(),
         },
       ),
     );

@@ -1,8 +1,10 @@
+import 'package:booknote/presentation/local/book/components/book_about/book_about.dart';
+import 'package:booknote/presentation/local/book/components/book_delete/book_delete.dart';
 import 'package:booknote/presentation/local/bookshelf/bookshelf.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/material.dart';
 import 'components/constants.dart';
-import 'components/helper.dart';
+import 'components/on_selected.dart';
 import 'components/menu_icon.dart';
 
 class BookAppBar extends StatelessWidget {
@@ -60,7 +62,20 @@ class BookAppBar extends StatelessWidget {
               );
             }).toList();
           },
-          onSelected: onSelected,
+          onSelected: (String action) {
+            if (action == MenuActions.cover) {
+              Navigator.pushNamed(context, Bookshelf.routeName);
+            } else if (action == MenuActions.about) {
+              print('about');
+            } else if (action == MenuActions.move) {
+              print('move');
+            } else if (action == MenuActions.delete) {
+              showDialog(
+                context: context,
+                builder: (_) => deleteBookDialog(_),
+              );
+            }
+          },
         ),
       ],
     );
