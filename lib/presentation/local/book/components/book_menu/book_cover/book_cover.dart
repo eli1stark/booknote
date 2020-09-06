@@ -1,6 +1,9 @@
+import 'dart:io';
 import 'package:booknote/presentation/global/components/big_title.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'components/appbar.dart';
+import 'components/upload_cover/upload_cover.dart';
 
 class BookCover extends StatefulWidget {
   static const routeName = '/book_cover';
@@ -11,6 +14,31 @@ class BookCover extends StatefulWidget {
 
 class _BookCoverState extends State<BookCover> {
   bool selected = false;
+
+  // TODO create local database to store uploaded images
+  // IF user will change device than all uploaded images will be lost
+  // I won't store them in Google Cloud (too much for thsi app)
+  // Just SQL or NoSQL database, all info other than uploaded images
+  // will be stored in the Firestore
+  // image picker
+  File _image;
+  final picker = ImagePicker();
+
+  Future getImage() async {
+    try {
+      print('Start');
+      final pickedFile = await picker.getImage(source: ImageSource.gallery);
+
+      setState(() {
+        _image = File(pickedFile.path);
+        print(_image);
+      });
+      print('End');
+    } catch (e) {
+      print(e);
+    }
+  }
+  // end
 
   @override
   Widget build(BuildContext context) {
@@ -56,6 +84,8 @@ class _BookCoverState extends State<BookCover> {
                       networkImage: networkImage,
                     ),
                     SizedBox(width: 20.0),
+                    // TODO
+                    _image != null ? Image.file(_image) : Container(),
                   ],
                 ),
               ),
@@ -63,94 +93,7 @@ class _BookCoverState extends State<BookCover> {
           ),
           Expanded(
             flex: 6,
-            child: Container(
-              // decoration: BoxDecoration(
-              //   border: Border.all(color: Colors.blueAccent),
-              // ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    '💡Hints: ',
-                    style: TextStyle(
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.only(
-                      top: 5.0,
-                      left: 10.0,
-                      right: 10.0,
-                    ),
-                    child: Text(
-                      '1. The ideal size of your eBook cover is a height/width ratio of 1.6:1.',
-                      style: TextStyle(
-                        fontSize: 20.0,
-                      ),
-                    ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.only(
-                      top: 5.0,
-                      left: 10.0,
-                      right: 10.0,
-                    ),
-                    child: Text(
-                      '2. Pink shadow indicates selected cover.',
-                      style: TextStyle(
-                        fontSize: 20.0,
-                      ),
-                    ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.only(
-                      top: 5.0,
-                      left: 10.0,
-                      right: 10.0,
-                    ),
-                    child: Text(
-                      '3. You can upload one cover per book.',
-                      style: TextStyle(
-                        fontSize: 20.0,
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: SizedBox(),
-                  ),
-                  Center(
-                    child: InkWell(
-                      onTap: () {},
-                      borderRadius: BorderRadius.circular(15.0),
-                      child: Container(
-                        padding: EdgeInsets.symmetric(
-                          vertical: 10.0,
-                          horizontal: 20.0,
-                        ),
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Colors.grey,
-                            width: 3.0,
-                          ),
-                          borderRadius: BorderRadius.circular(15.0),
-                          // color: Colors.grey[100],
-                        ),
-                        child: Text(
-                          'Upload Image',
-                          style: TextStyle(
-                            fontSize: 25.0,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: SizedBox(),
-                  ),
-                ],
-              ),
-            ),
+            child: UploadBookCover(getImage),
           )
         ],
       ),

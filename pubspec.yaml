@@ -26,6 +26,8 @@ dependencies:
   auto_size_text: ^2.1.0
   # custom spinners:
   flutter_spinkit: ^4.1.2+1
+  # upload images to the app
+  image_picker: ^0.6.7+7
 
   # State Management
   # provider:
