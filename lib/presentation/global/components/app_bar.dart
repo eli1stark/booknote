@@ -20,6 +20,7 @@ class MainAppBar extends StatelessWidget {
       elevation: 0,
       backgroundColor: Colors.white,
       leading: IconButton(
+        highlightColor: Colors.transparent,
         icon: Icon(
           Icons.arrow_back,
           color: Colors.black,
@@ -29,6 +30,7 @@ class MainAppBar extends StatelessWidget {
       ),
       actions: <Widget>[
         IconButton(
+          highlightColor: Colors.transparent,
           icon: fontAwesome
               ? FaIcon(
                   iconRight,

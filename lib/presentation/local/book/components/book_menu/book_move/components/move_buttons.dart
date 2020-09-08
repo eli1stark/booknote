@@ -11,14 +11,30 @@ class BookMoveButtons extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         FlatButton(
-          child: Text('Cancel'),
-          color: Colors.grey[300],
+          highlightColor: Colors.transparent,
+          splashColor: Colors.grey[200],
+          child: Text(
+            'CANCEL',
+            style: TextStyle(
+              color: Colors.grey,
+              fontSize: 17.0,
+            ),
+          ),
+          // color: Colors.grey[300],
           onPressed: () => Navigator.pop(context),
         ),
         SizedBox(width: size.width * 0.0487),
         FlatButton(
-          child: Text('Submit'),
-          color: Colors.grey[300],
+          highlightColor: Colors.transparent,
+          splashColor: Colors.grey[200],
+          child: Text(
+            'SUBMIT',
+            style: TextStyle(
+              color: Colors.grey,
+              fontSize: 17.0,
+            ),
+          ),
+          // color: Colors.grey[300],
           onPressed: () {
             // TODO move the book
             Navigator.pushNamed(context, Bookshelf.routeName);

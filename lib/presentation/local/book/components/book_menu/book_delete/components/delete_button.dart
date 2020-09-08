@@ -19,7 +19,6 @@ class DeleteBookButton extends StatelessWidget {
         style: TextStyle(
           fontSize: 17.0,
           color: Colors.grey,
-          fontWeight: FontWeight.bold,
         ),
       ),
       onPressed: onPressed,

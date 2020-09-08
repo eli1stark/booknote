@@ -4,6 +4,7 @@ import 'domain/categories.dart';
 import 'infrastructure/database/database.dart';
 import 'presentation/global/theme/scroll_behavior.dart';
 import 'presentation/local/book/components/book_menu/book_cover/book_cover.dart';
+import 'presentation/local/book/components/book_tracker/book_tracker.dart';
 import 'presentation/local/emoji_picker/emoji_picker.dart';
 import 'presentation/local/bookshelf/bookshelf.dart';
 import 'presentation/local/book/book.dart';

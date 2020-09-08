@@ -13,6 +13,8 @@ class ImageFrame extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FlatButton(
+      highlightColor: Colors.transparent,
+      splashColor: Colors.transparent,
       padding: EdgeInsets.all(0),
       onPressed: () {
         Navigator.pushNamed(

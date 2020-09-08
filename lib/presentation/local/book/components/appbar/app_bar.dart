@@ -12,6 +12,7 @@ class BookAppBar extends StatelessWidget {
       elevation: 0,
       backgroundColor: Colors.white,
       leading: IconButton(
+        highlightColor: Colors.transparent,
         icon: Icon(
           Icons.arrow_back,
           color: Colors.black,

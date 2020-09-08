@@ -12,12 +12,14 @@ class BookMenuContentContainer extends Dialog {
 
     return Dialog(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
+        borderRadius: BorderRadius.circular(25.0),
       ),
       child: Container(
-        padding: EdgeInsets.symmetric(
-          vertical: size.height * 0.0293,
-          horizontal: size.width * 0.0487,
+        padding: EdgeInsets.only(
+          top: size.height * 0.0293,
+          bottom: size.height * 0.012,
+          right: size.width * 0.0487,
+          left: size.width * 0.0487,
         ),
         child: child,
       ),

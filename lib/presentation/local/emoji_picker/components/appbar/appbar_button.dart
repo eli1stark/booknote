@@ -13,6 +13,8 @@ class AppBarButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      highlightColor: Colors.transparent,
+      splashColor: Colors.grey[200],
       child: Container(
         padding: EdgeInsets.only(
           left: 10.0,

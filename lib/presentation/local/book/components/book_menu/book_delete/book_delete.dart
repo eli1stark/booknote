@@ -18,11 +18,11 @@ AlertDialog deleteBookDialog(BuildContext context) {
     ),
     actions: [
       DeleteBookButton(
-        text: 'Cancel',
+        text: 'CANCEL',
         onPressed: () => Navigator.pop(context),
       ),
       DeleteBookButton(
-        text: 'Yes',
+        text: 'DELETE',
         onPressed: () {
           // TODO delete the book from Firestore
           Navigator.pushNamed(context, Bookshelf.routeName);

@@ -1,3 +1,4 @@
+import 'package:booknote/presentation/local/book/components/book_tracker/book_tracker.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'components/book_frame.dart';
@@ -23,7 +24,10 @@ class BookBox extends StatelessWidget {
             child: BookBoxButton(
               icon: FontAwesomeIcons.thumbtack,
               // TODO add book tracker functionality
-              onTap: () {},
+              onTap: () => showDialog(
+                context: context,
+                builder: (_) => bookTrackerDialog(_),
+              ),
             ),
           ),
           Expanded(

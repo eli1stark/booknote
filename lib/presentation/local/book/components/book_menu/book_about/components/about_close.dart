@@ -9,13 +9,15 @@ class BookAboutClose extends StatelessWidget {
     return Align(
       alignment: Alignment.bottomRight,
       child: FlatButton(
+        highlightColor: Colors.transparent,
+        splashColor: Colors.grey[200],
         child: Text(
-          'Close',
+          'CLOSE',
           style: TextStyle(
-            fontSize: size.width * 0.039,
+            fontSize: size.width * 0.04,
+            color: Colors.grey
           ),
         ),
-        color: Colors.grey[300],
         onPressed: () => Navigator.pop(context),
       ),
     );

@@ -8,6 +8,8 @@ AppBar bookshelfAppBar(context) {
     // building Icon to create new context to open drawer
     leading: Builder(
       builder: (context) => IconButton(
+        highlightColor: Colors.transparent,
+        splashColor: Colors.grey[200],
         icon: Icon(
           Icons.menu,
           color: Colors.black,
@@ -20,6 +22,8 @@ AppBar bookshelfAppBar(context) {
     ),
     actions: <Widget>[
       IconButton(
+        highlightColor: Colors.transparent,
+        splashColor: Colors.grey[200],
         icon: Icon(
           Icons.search,
           color: Colors.black,
