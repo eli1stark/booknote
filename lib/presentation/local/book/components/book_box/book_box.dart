@@ -1,6 +1,7 @@
-import 'package:booknote/presentation/local/book/components/book_tracker/book_tracker.dart';
-import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter/material.dart';
+import '../book_editor/book_editor.dart';
+import '../book_tracker/book_tracker.dart';
 import 'components/book_frame.dart';
 import 'components/box_button.dart';
 
@@ -49,7 +50,7 @@ class BookBox extends StatelessWidget {
             child: BookBoxButton(
               icon: FontAwesomeIcons.pencilAlt,
               // TODO add note editor functionality
-              onTap: () {},
+              onTap: () => Navigator.pushNamed(context, BookEditor.routeName),
             ),
           ),
         ],

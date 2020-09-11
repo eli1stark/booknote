@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// FOR book_about and book_move pages
 class BookMenuContentContainer extends Dialog {
   BookMenuContentContainer({this.child});
 
