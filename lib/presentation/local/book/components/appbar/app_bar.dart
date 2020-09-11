@@ -2,7 +2,7 @@ import 'package:booknote/presentation/local/bookshelf/bookshelf.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/material.dart';
 import 'components/constants.dart';
-import 'components/helper.dart';
+import 'components/on_selected.dart';
 import 'components/menu_icon.dart';
 
 class BookAppBar extends StatelessWidget {
@@ -12,15 +12,13 @@ class BookAppBar extends StatelessWidget {
       elevation: 0,
       backgroundColor: Colors.white,
       leading: IconButton(
+        highlightColor: Colors.transparent,
         icon: Icon(
           Icons.arrow_back,
           color: Colors.black,
           size: 35.0,
         ),
-        onPressed: () => Navigator.pushNamed(
-          context,
-          Bookshelf.routeName,
-        ),
+        onPressed: () => Navigator.pushNamed(context, Bookshelf.routeName),
       ),
       actions: <Widget>[
         PopupMenuButton<String>(
@@ -60,7 +58,7 @@ class BookAppBar extends StatelessWidget {
               );
             }).toList();
           },
-          onSelected: onSelected,
+          onSelected: (action) => onSelected(action, context),
         ),
       ],
     );

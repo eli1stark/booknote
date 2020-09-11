@@ -11,10 +11,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  
+
   # Core
   cupertino_icons: ^0.1.3
-  
+
   # Helpers
   # app icon installer:
   flutter_launcher_icons: ^0.7.5
@@ -26,10 +26,21 @@ dependencies:
   auto_size_text: ^2.1.0
   # custom spinners:
   flutter_spinkit: ^4.1.2+1
+  # upload images to the app
+  image_picker: ^0.6.7+7
+  # webview for Editor
+  webview_flutter: ^0.3.22+1
 
-  # Provider
+  # Zefyr (Note Editor) functionality
+  zefyr: ^0.11.0
+
+
+  # State Management
+  # provider:
   provider: ^4.1.3
-  
+  # bloc + cubit:
+  flutter_bloc: ^6.0.5
+
   # Firebase
   # authentication:
   firebase_auth: ^0.16.1
@@ -52,8 +63,10 @@ flutter:
   assets:
     - images/samples/
     - images/
-    
+    - files/
+
   fonts:
-   - family: Lato
-     fonts:
-       - asset: fonts/Lato-Regular.ttf
+    - family: Lato
+      fonts:
+        - asset: fonts/Lato-Regular.ttf
+

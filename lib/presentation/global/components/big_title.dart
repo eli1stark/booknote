@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class BigTitle extends StatelessWidget {
-  BigTitle({this.text, this.size});
+  BigTitle({
+    @required this.text,
+    @required this.size,
+  });
 
   final String text;
   final double size;

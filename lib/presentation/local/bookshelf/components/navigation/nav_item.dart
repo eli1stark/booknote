@@ -9,6 +9,8 @@ class MenuItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FlatButton(
+      highlightColor: Colors.transparent,
+      splashColor: Colors.grey[200],
       padding: EdgeInsets.all(0),
       onPressed: onTap,
       child: Align(

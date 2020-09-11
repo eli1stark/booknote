@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 import 'domain/categories.dart';
 import 'infrastructure/database/database.dart';
 import 'presentation/global/theme/scroll_behavior.dart';
+import 'presentation/local/book/components/book_editor/book_editor.dart';
+import 'presentation/local/book/components/book_menu/book_cover/book_cover.dart';
 import 'presentation/local/emoji_picker/emoji_picker.dart';
 import 'presentation/local/bookshelf/bookshelf.dart';
 import 'presentation/local/book/book.dart';
 import 'presentation/local/categories/categories.dart';
 import 'presentation/local/search/search.dart';
-import 'presentation/test.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -46,14 +47,16 @@ class Booknote extends StatelessWidget {
           fontFamily: 'Lato',
           accentColor: Colors.grey,
         ),
-        initialRoute: Bookshelf.routeName,
+        // initialRoute: Bookshelf.routeName,
+        initialRoute: BookEditor.routeName,
         routes: {
           Bookshelf.routeName: (context) => Bookshelf(),
           Book.routeName: (context) => Book(),
           Categories.routeName: (context) => Categories(),
           EmojiPicker.routeName: (context) => EmojiPicker(),
           Search.routeName: (context) => Search(),
-          '/test': (context) => Test(),
+          BookCover.routeName: (context) => BookCover(),
+          BookEditor.routeName: (context) => BookEditor()
         },
       ),
     );

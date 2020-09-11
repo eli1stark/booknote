@@ -13,6 +13,8 @@ class SearchAppBar extends StatelessWidget {
       elevation: 5.0,
       backgroundColor: Colors.white,
       leading: IconButton(
+        highlightColor: Colors.transparent,
+        splashColor: Colors.grey[200],
         padding: EdgeInsets.all(0.0),
         icon: Icon(
           Icons.arrow_back,

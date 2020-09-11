@@ -20,6 +20,7 @@ class BookBoxButton extends StatelessWidget {
       child: Align(
         alignment: Alignment.bottomCenter,
         child: InkWell(
+          highlightColor: Colors.transparent,
           customBorder: CircleBorder(),
           onTap: onTap,
           child: Container(
