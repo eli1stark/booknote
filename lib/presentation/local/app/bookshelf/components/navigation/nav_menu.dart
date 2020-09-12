@@ -1,3 +1,4 @@
+import 'package:booknote/infrastructure/auth/auth.dart';
 import '../../../categories/categories.dart';
 import 'package:flutter/material.dart';
 import '../../../about/about.dart';
@@ -31,7 +32,7 @@ class NavigationMenu extends StatelessWidget {
         ),
         MenuItem(
           text: 'Sign out',
-          onTap: () {},
+          onTap: () async => await AuthService().signOut(),
         ),
       ],
     );

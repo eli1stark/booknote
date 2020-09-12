@@ -1,7 +1,7 @@
 import 'package:booknote/domain/auth/auth_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../application/auth/auth_cubit.dart';
+import '../../../../application/auth/auth_state_cubit.dart';
 
 class BottomText extends StatelessWidget {
   const BottomText({

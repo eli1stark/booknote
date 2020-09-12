@@ -2,17 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'components/bottom_text.dart';
 import 'components/buttons.dart';
-import 'components/email_password.dart';
+import 'components/credentials.dart';
 import 'components/header.dart';
-import '../../../application/auth/auth_cubit.dart';
+import '../../../application/auth/auth_state_cubit.dart';
+import '../../../application/auth/credentials_cubit.dart';
 
 class Authentication extends StatelessWidget {
   static const routeName = '/auth';
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<AuthStateCubit>(
-      create: (BuildContext context) => AuthStateCubit(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<AuthStateCubit>(
+          create: (BuildContext context) => AuthStateCubit(),
+        ),
+        BlocProvider<CredentialsCubit>(
+          create: (BuildContext context) => CredentialsCubit(),
+        ),
+      ],
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.white,
@@ -29,7 +37,7 @@ class Authentication extends StatelessWidget {
               ),
               Expanded(
                 flex: 2,
-                child: LoginSignUpButtons(),
+                child: LogInSignUpButtons(),
               ),
               Expanded(
                 flex: 1,

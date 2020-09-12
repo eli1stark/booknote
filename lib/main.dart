@@ -12,6 +12,7 @@ import 'presentation/local/app/book/book.dart';
 import 'presentation/local/app/categories/categories.dart';
 import 'presentation/local/app/search/search.dart';
 import 'package:provider/provider.dart';
+import 'presentation/local/controller/controller.dart';
 
 void main() {
   runApp(Booknote());
@@ -48,8 +49,7 @@ class Booknote extends StatelessWidget {
           fontFamily: 'Lato',
           accentColor: Colors.grey,
         ),
-        // initialRoute: Bookshelf.routeName,
-        initialRoute: Authentication.routeName,
+        initialRoute: Controller.routeName,
         routes: {
           Bookshelf.routeName: (context) => Bookshelf(),
           Book.routeName: (context) => Book(),
@@ -59,6 +59,7 @@ class Booknote extends StatelessWidget {
           BookCover.routeName: (context) => BookCover(),
           BookEditor.routeName: (context) => BookEditor(),
           Authentication.routeName: (context) => Authentication(),
+          Controller.routeName: (context) => Controller()
         },
       ),
     );
