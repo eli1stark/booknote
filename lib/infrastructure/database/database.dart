@@ -1,4 +1,4 @@
-import 'package:booknote/domain/categories.dart';
+import 'package:booknote/domain/categories/categories.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class DatabaseService {

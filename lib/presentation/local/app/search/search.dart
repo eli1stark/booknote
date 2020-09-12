@@ -1,4 +1,4 @@
-import 'package:booknote/domain/categories.dart';
+import 'package:booknote/domain/categories/categories.dart';
 import 'package:booknote/infrastructure/api/methods_api.dart';
 import 'package:booknote/presentation/global/components/alert_info.dart';
 import 'package:booknote/presentation/global/components/loader.dart';
