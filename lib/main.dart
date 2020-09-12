@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'domain/categories.dart';
 import 'infrastructure/database/database.dart';
 import 'presentation/global/theme/scroll_behavior.dart';
+import 'presentation/local/auth/authentication.dart';
 import 'presentation/local/book/components/book_editor/book_editor.dart';
 import 'presentation/local/book/components/book_menu/book_cover/book_cover.dart';
 import 'presentation/local/emoji_picker/emoji_picker.dart';
@@ -48,7 +49,7 @@ class Booknote extends StatelessWidget {
           accentColor: Colors.grey,
         ),
         // initialRoute: Bookshelf.routeName,
-        initialRoute: BookEditor.routeName,
+        initialRoute: Authentication.routeName,
         routes: {
           Bookshelf.routeName: (context) => Bookshelf(),
           Book.routeName: (context) => Book(),
@@ -56,7 +57,8 @@ class Booknote extends StatelessWidget {
           EmojiPicker.routeName: (context) => EmojiPicker(),
           Search.routeName: (context) => Search(),
           BookCover.routeName: (context) => BookCover(),
-          BookEditor.routeName: (context) => BookEditor()
+          BookEditor.routeName: (context) => BookEditor(),
+          Authentication.routeName: (context) => Authentication(),
         },
       ),
     );
