@@ -1,6 +1,6 @@
 import 'package:booknote/infrastructure/api/methods_api.dart';
 import 'package:booknote/infrastructure/database/database.dart';
-import 'package:booknote/presentation/local/bookshelf/bookshelf.dart';
+import '../../../../bookshelf/bookshelf.dart';
 import 'package:flutter/material.dart';
 import '../../utils.dart';
 

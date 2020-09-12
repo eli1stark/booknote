@@ -1,4 +1,4 @@
-import 'package:booknote/presentation/local/bookshelf/bookshelf.dart';
+import '../../../../bookshelf/bookshelf.dart';
 import 'package:flutter/material.dart';
 import 'components/delete_button.dart';
 

@@ -1,5 +1,5 @@
-import 'package:booknote/presentation/local/book/book.dart';
 import 'package:flutter/material.dart';
+import '../../book/book.dart';
 
 class ImageFrame extends StatelessWidget {
   ImageFrame({

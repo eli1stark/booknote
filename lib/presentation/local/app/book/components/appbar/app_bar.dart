@@ -1,5 +1,5 @@
-import 'package:booknote/presentation/local/bookshelf/bookshelf.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../../../bookshelf/bookshelf.dart';
 import 'package:flutter/material.dart';
 import 'components/constants.dart';
 import 'components/on_selected.dart';

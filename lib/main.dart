@@ -4,13 +4,13 @@ import 'domain/categories.dart';
 import 'infrastructure/database/database.dart';
 import 'presentation/global/theme/scroll_behavior.dart';
 import 'presentation/local/auth/authentication.dart';
-import 'presentation/local/book/components/book_editor/book_editor.dart';
-import 'presentation/local/book/components/book_menu/book_cover/book_cover.dart';
-import 'presentation/local/emoji_picker/emoji_picker.dart';
-import 'presentation/local/bookshelf/bookshelf.dart';
-import 'presentation/local/book/book.dart';
-import 'presentation/local/categories/categories.dart';
-import 'presentation/local/search/search.dart';
+import 'presentation/local/app/book/components/book_editor/book_editor.dart';
+import 'presentation/local/app/book/components/book_menu/book_cover/book_cover.dart';
+import 'presentation/local/app/emoji_picker/emoji_picker.dart';
+import 'presentation/local/app/bookshelf/bookshelf.dart';
+import 'presentation/local/app/book/book.dart';
+import 'presentation/local/app/categories/categories.dart';
+import 'presentation/local/app/search/search.dart';
 import 'package:provider/provider.dart';
 
 void main() {

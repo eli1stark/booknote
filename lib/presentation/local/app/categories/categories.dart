@@ -2,7 +2,7 @@ import 'package:booknote/domain/categories.dart';
 import 'package:booknote/infrastructure/database/database.dart';
 import 'package:booknote/presentation/global/components/big_title.dart';
 import 'package:booknote/presentation/global/components/loader.dart';
-import 'package:booknote/presentation/local/emoji_picker/emoji_picker.dart';
+import '../emoji_picker/emoji_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'components/app_bar.dart';

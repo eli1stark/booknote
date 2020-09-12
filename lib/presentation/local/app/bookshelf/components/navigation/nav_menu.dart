@@ -1,4 +1,4 @@
-import 'package:booknote/presentation/local/categories/categories.dart';
+import '../../../categories/categories.dart';
 import 'package:flutter/material.dart';
 import '../../../about/about.dart';
 import 'nav_item.dart';

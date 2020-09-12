@@ -1,6 +1,6 @@
 import 'package:booknote/infrastructure/database/database.dart';
 import 'package:booknote/presentation/global/theme/constants.dart';
-import 'package:booknote/presentation/local/emoji_picker/emoji_picker.dart';
+import '../../../emoji_picker/emoji_picker.dart';
 import 'package:flutter/material.dart';
 
 class AddForm extends StatefulWidget {
