@@ -2,7 +2,7 @@ import 'package:booknote/domain/auth/auth_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AuthStateCubit extends Cubit<AuthState> {
-  AuthStateCubit() : super(AuthState.register);
+  AuthStateCubit() : super(AuthState.login);
 
   void nextState(AuthState state) {
     if (state == AuthState.register) {
