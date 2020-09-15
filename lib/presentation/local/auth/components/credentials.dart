@@ -35,11 +35,14 @@ class EmailPassword extends StatelessWidget {
                   children: [
                     TextFormField(
                       style: authFieldStyle,
+                      textInputAction: TextInputAction.next,
                       decoration: authFieldDecoration(true),
                       validator: (value) =>
                           emailValidator(value) ? null : emailHint,
                       onChanged: (value) =>
                           credentialsCubit.updateEmail(value, credentialsState),
+                      onFieldSubmitted: (value) =>
+                          FocusScope.of(context).nextFocus(),
                     ),
                     SizedBox(
                       height: size.height * 0.039,
@@ -47,6 +50,7 @@ class EmailPassword extends StatelessWidget {
                     TextFormField(
                       obscureText: true,
                       style: authFieldStyle,
+                      textInputAction: TextInputAction.done,
                       decoration: authFieldDecoration(false),
                       validator: (value) =>
                           passwordValidator(value) ? passwordHint : null,
