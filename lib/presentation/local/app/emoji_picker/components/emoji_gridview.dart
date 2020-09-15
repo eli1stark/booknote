@@ -1,4 +1,4 @@
-import 'package:booknote/infrastructure/database/database.dart';
+import 'package:booknote/infrastructure/database/database2.dart';
 import 'package:flutter/material.dart';
 
 class EmojiGridView extends StatelessWidget {
@@ -54,7 +54,7 @@ class EmojiGridView extends StatelessWidget {
                 categories[item['indexKey']] = item;
 
                 // update Firestore
-                DatabaseService().updateCategories(categories);
+                DatabaseService1().updateCategories(categories);
                 Navigator.pop(context);
               } else if (status == 'add') {
                 // go back to the AddForm()

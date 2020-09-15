@@ -1,5 +1,5 @@
 import 'package:booknote/domain/categories/categories.dart';
-import 'package:booknote/infrastructure/database/database.dart';
+import 'package:booknote/infrastructure/database/database2.dart';
 import 'package:booknote/presentation/global/components/big_title.dart';
 import 'package:booknote/presentation/global/components/loader.dart';
 import '../emoji_picker/emoji_picker.dart';
@@ -29,6 +29,8 @@ class _CategoriesState extends State<Categories> {
       var categories = Provider.of<CategoriesData>(context).categories;
       int idCounter = Provider.of<CategoriesData>(context).idCounter;
 
+      print(categories);
+
       return Scaffold(
         backgroundColor: Colors.white,
         appBar: PreferredSize(
@@ -36,6 +38,7 @@ class _CategoriesState extends State<Categories> {
           preferredSize: Size.fromHeight(kToolbarHeight),
         ),
         floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.black87,
           child: Icon(
             Icons.add,
             size: 30.0,
@@ -97,7 +100,7 @@ class _CategoriesState extends State<Categories> {
                       }
 
                       // update Firestore
-                      DatabaseService().updateCategories(categories);
+                      DatabaseService1().updateCategories(categories);
                     });
                   },
                 ),
@@ -116,4 +119,4 @@ class _CategoriesState extends State<Categories> {
 // TODO ask user: Are you sure you wnat to delete this category?
 // TODO when one category left restrict delete of it
 // TODO restrict duplicated categories, (This category already exists) because of Dropdown menu in Search page
-// TODO restrict size of the category to 20 chars maybe less
+// TODO restrict length of the category to 20 chars maybe less

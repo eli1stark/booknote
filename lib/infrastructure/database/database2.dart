@@ -1,7 +1,7 @@
 import 'package:booknote/domain/categories/categories.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class DatabaseService {
+class DatabaseService1 {
   // collection reference
   // final CollectionReference users = Firestore.instance.collection('users');
 
@@ -72,4 +72,3 @@ class DatabaseService {
     });
   }
 }
-

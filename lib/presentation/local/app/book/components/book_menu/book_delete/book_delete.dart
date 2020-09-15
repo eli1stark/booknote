@@ -1,4 +1,4 @@
-import '../../../../bookshelf/bookshelf.dart';
+import '../../../../bookshelf/bookshelf1.dart';
 import 'package:flutter/material.dart';
 import 'components/delete_button.dart';
 
@@ -25,7 +25,7 @@ AlertDialog deleteBookDialog(BuildContext context) {
         text: 'DELETE',
         onPressed: () {
           // TODO delete the book from Firestore
-          Navigator.pushNamed(context, Bookshelf.routeName);
+          Navigator.pushNamed(context, Bookshelf1.routeName);
         },
       ),
     ],

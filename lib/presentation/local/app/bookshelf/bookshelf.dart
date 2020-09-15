@@ -1,92 +1,22 @@
-import 'package:booknote/domain/categories/categories.dart';
-import 'package:booknote/presentation/global/components/alert_info.dart';
-import 'package:booknote/presentation/global/components/big_title.dart';
-import 'package:booknote/presentation/global/components/loader.dart';
 import 'package:flutter/material.dart';
+import '../../../global/components/big_title.dart';
 import 'components/app_bar.dart';
-import 'components/image_frame.dart';
 import 'components/custom_gridview.dart';
-import 'components/tabs/tab_divider.dart';
+import 'components/image_frame.dart';
 import 'components/navigation/nav_menu.dart';
+import 'components/tabs/tab_divider.dart';
 import 'components/tabs/tabs_container.dart';
-import 'package:provider/provider.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
-class Bookshelf extends StatefulWidget {
+class Bookshelf extends StatelessWidget {
   static const routeName = '/';
 
   @override
-  _BookshelfState createState() => _BookshelfState();
-}
-
-class _BookshelfState extends State<Bookshelf> with TickerProviderStateMixin {
-  TabController _controller;
-
-  Widget processBooks(
-    Map category,
-    List booksFromDatabase,
-    Size size,
-  ) {
-    // declare new list
-    List<Widget> books = [];
-
-    // iterate through all books
-    for (var book in booksFromDatabase) {
-      if (book['categoryID'] == category['id']) {
-        if (book['networkImage'] != null) {
-          books.add(
-            ImageFrame(
-              imagePath: '${book['networkImage']}',
-              networkImage: true,
-            ),
-          );
-        } else {
-          books.add(
-            ImageFrame(
-              imagePath: 'images/samples/${book['imagePath']}',
-              networkImage: false,
-            ),
-          );
-        }
-      }
-    }
-
-    // If list is empty, else
-    if (books.length == 0) {
-      return Card(
-        child: AlertInfo(
-          image: 'images/no_content.png',
-          text: 'No Content!',
-          size: size,
-        ),
-      );
-    } else {
-      return Card(
-        child: CustomGridView(
-          books: books,
-        ),
-      );
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
-    // check size of the user's phone
-    Size size = MediaQuery.of(context).size;
+    TabController _controller;
 
-    // Checking whether data arrived
-    if (Provider.of<CategoriesData>(context) != null &&
-        Provider.of<QuerySnapshot>(context) != null) {
-      // Getting data ('categories') from the Stream using Provider
-      var categories = Provider.of<CategoriesData>(context).categories;
-
-      // Getting all documents from 'books' collection using Provider
-      var booksFromDatabase = Provider.of<QuerySnapshot>(context).documents;
-
-      // Tabs controller
-      _controller = TabController(length: categories.length, vsync: this);
-
-      return Scaffold(
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
         backgroundColor: Colors.white,
         appBar: bookshelfAppBar(context),
         drawer: Drawer(
@@ -102,23 +32,41 @@ class _BookshelfState extends State<Bookshelf> with TickerProviderStateMixin {
             ),
             TabsContainer(
               controller: _controller,
-              categories: categories,
             ),
             TabDivider(),
             Expanded(
               child: TabBarView(
-                controller: _controller,
-                children: <Widget>[
-                  for (Map category in categories)
-                    processBooks(category, booksFromDatabase, size),
+                children: [
+                  for (int i = 0; i < 2; i++) CustomGridView(books: books)
                 ],
               ),
             ),
           ],
         ),
-      );
-    } else {
-      return Loader();
-    }
+      ),
+    );
   }
 }
+
+List<Widget> books = [
+  ImageFrame(
+    imagePath: 'images/samples/book-1.jpeg',
+    networkImage: false,
+  ),
+  ImageFrame(
+    imagePath: 'images/samples/book-2.jpeg',
+    networkImage: false,
+  ),
+  ImageFrame(
+    imagePath: 'images/samples/book-3.jpeg',
+    networkImage: false,
+  ),
+  ImageFrame(
+    imagePath: 'images/samples/book-4.png',
+    networkImage: false,
+  ),
+  ImageFrame(
+    imagePath: 'images/samples/book-5.png',
+    networkImage: false,
+  )
+];

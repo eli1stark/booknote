@@ -1,4 +1,4 @@
-import 'package:booknote/infrastructure/database/database.dart';
+import 'package:booknote/infrastructure/database/database2.dart';
 import 'package:flutter/material.dart';
 import 'delete_button.dart';
 import 'edit_form.dart';
@@ -38,7 +38,7 @@ void showSettingsPanel(context, item, categories) {
                   }
 
                   // update Firestore
-                  DatabaseService().updateCategories(categories);
+                  DatabaseService1().updateCategories(categories);
                   Navigator.pop(context);
                 },
               ),

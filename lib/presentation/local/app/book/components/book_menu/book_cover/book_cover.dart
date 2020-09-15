@@ -5,6 +5,8 @@ import 'package:image_picker/image_picker.dart';
 import 'components/appbar.dart';
 import 'components/upload_cover/upload_cover.dart';
 
+// todo use opacity for unselected covers
+
 class BookCover extends StatefulWidget {
   static const routeName = '/book_cover';
 

@@ -1,6 +1,6 @@
 import 'package:booknote/infrastructure/api/methods_api.dart';
-import 'package:booknote/infrastructure/database/database.dart';
-import '../../../../bookshelf/bookshelf.dart';
+import 'package:booknote/infrastructure/database/database2.dart';
+import '../../../../bookshelf/bookshelf1.dart';
 import 'package:flutter/material.dart';
 import '../../utils.dart';
 
@@ -112,7 +112,7 @@ class _AddBookFormState extends State<AddBookForm> {
                   processSelflinkImages(result['volumeInfo']['imageLinks']);
 
               // add new book to the database
-              DatabaseService().addNewBook(
+              DatabaseService1().addNewBook(
                 categoryID,
                 newImage,
                 widget.title,
@@ -126,7 +126,7 @@ class _AddBookFormState extends State<AddBookForm> {
               // setState(() => resultFromAPI = null);
 
               // go to the Bookshelf page
-              Navigator.pushNamed(context, Bookshelf.routeName);
+              Navigator.pushNamed(context, Bookshelf1.routeName);
             }
           },
         ),

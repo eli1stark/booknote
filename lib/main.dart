@@ -1,13 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'domain/categories/categories.dart';
-import 'infrastructure/database/database.dart';
+import 'infrastructure/database/database2.dart';
 import 'presentation/global/theme/scroll_behavior.dart';
+import 'presentation/local/app/bookshelf/bookshelf.dart';
 import 'presentation/local/auth/authentication.dart';
 import 'presentation/local/app/book/components/book_editor/book_editor.dart';
 import 'presentation/local/app/book/components/book_menu/book_cover/book_cover.dart';
 import 'presentation/local/app/emoji_picker/emoji_picker.dart';
-import 'presentation/local/app/bookshelf/bookshelf.dart';
+import 'presentation/local/app/bookshelf/bookshelf1.dart';
 import 'presentation/local/app/book/book.dart';
 import 'presentation/local/app/categories/categories.dart';
 import 'presentation/local/app/search/search.dart';
@@ -27,10 +28,10 @@ class Booknote extends StatelessWidget {
     return MultiProvider(
       providers: [
         StreamProvider<CategoriesData>.value(
-          value: DatabaseService().userCategories,
+          value: DatabaseService1().userCategories,
         ),
         StreamProvider<QuerySnapshot>.value(
-          value: DatabaseService().userBooks,
+          value: DatabaseService1().userBooks,
         ),
         // to be continued
       ],
@@ -51,6 +52,7 @@ class Booknote extends StatelessWidget {
         ),
         initialRoute: Controller.routeName,
         routes: {
+          Bookshelf1.routeName: (context) => Bookshelf1(),
           Bookshelf.routeName: (context) => Bookshelf(),
           Book.routeName: (context) => Book(),
           Categories.routeName: (context) => Categories(),

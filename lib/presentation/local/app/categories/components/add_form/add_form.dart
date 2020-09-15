@@ -1,4 +1,4 @@
-import 'package:booknote/infrastructure/database/database.dart';
+import 'package:booknote/infrastructure/database/database2.dart';
 import 'package:booknote/presentation/global/theme/constants.dart';
 import '../../../emoji_picker/emoji_picker.dart';
 import 'package:flutter/material.dart';
@@ -110,7 +110,7 @@ class _AddFormState extends State<AddForm> {
                 widget.categories.add(_item);
 
                 // update Firestore
-                DatabaseService().addCategory(
+                DatabaseService1().addCategory(
                   widget.categories,
                   _item['id'],
                 );

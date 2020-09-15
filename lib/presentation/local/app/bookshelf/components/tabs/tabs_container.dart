@@ -1,16 +1,14 @@
-import 'package:booknote/presentation/global/components/tab_bar.dart';
 import 'package:flutter/material.dart';
+import '../../../../../global/components/tab_bar.dart';
 import 'custom_tab.dart';
 
 class TabsContainer extends StatelessWidget {
   const TabsContainer({
-    @required TabController controller,
-    @required this.categories,
-  }) : _controller = controller;
+    @required this.controller,
+  });
 
-  final TabController _controller;
-  final List categories;
-
+  final TabController controller;
+  
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -19,13 +17,10 @@ class TabsContainer extends StatelessWidget {
       height: 50.0,
       color: Colors.white,
       child: CustomTabBar(
-        controller: _controller,
+        controller: controller,
         tabs: [
-          // iterate through all categories
-          for (Map category in categories)
-            CustomTab(
-              '${category['emoji'] + category['title']}',
-            ),
+          CustomTab('Text1'),
+          CustomTab('Text2'),
         ],
       ),
     );

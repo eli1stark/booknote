@@ -14,7 +14,6 @@ class Controller extends StatelessWidget {
       stream: AuthService().user,
       builder: (context, snapshot) {
         // return either Auth or App
-        print(snapshot.data);
         if (snapshot.data != null)
           return Bookshelf();
         else
