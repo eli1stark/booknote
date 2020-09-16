@@ -8,7 +8,7 @@ class Loader extends StatelessWidget {
       color: Colors.white,
       child: Center(
         child: SpinKitThreeBounce(
-          color: Colors.grey,
+          color: Colors.black,
           size: 50.0,
         ),
       ),

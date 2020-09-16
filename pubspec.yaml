@@ -28,12 +28,8 @@ dependencies:
   flutter_spinkit: ^4.1.2+1
   # upload images to the app
   image_picker: ^0.6.7+7
-  # webview for Editor
-  webview_flutter: ^0.3.22+1
-
-  # Zefyr (Note Editor) functionality
+  # Zefyr (Note Editor)
   zefyr: ^0.11.0
-
 
   # State Management
   # provider:
@@ -63,7 +59,6 @@ flutter:
   assets:
     - images/samples/
     - images/
-    - files/
 
   fonts:
     - family: Lato

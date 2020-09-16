@@ -1,43 +1,46 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'domain/categories.dart';
+import 'package:provider/provider.dart';
+import 'domain/auth/user.dart';
+import 'domain/categories/categories.dart';
+import 'infrastructure/auth/auth.dart';
 import 'infrastructure/database/database.dart';
 import 'presentation/global/theme/scroll_behavior.dart';
-import 'presentation/local/book/components/book_editor/book_editor.dart';
-import 'presentation/local/book/components/book_menu/book_cover/book_cover.dart';
-import 'presentation/local/emoji_picker/emoji_picker.dart';
-import 'presentation/local/bookshelf/bookshelf.dart';
-import 'presentation/local/book/book.dart';
-import 'presentation/local/categories/categories.dart';
-import 'presentation/local/search/search.dart';
-import 'package:provider/provider.dart';
+import 'presentation/local/app/bookshelf/bookshelf.dart';
+import 'presentation/local/auth/authentication.dart';
+import 'presentation/local/app/book/components/book_editor/book_editor.dart';
+import 'presentation/local/app/book/components/book_menu/book_cover/book_cover.dart';
+import 'presentation/local/app/emoji_picker/emoji_picker.dart';
+import 'presentation/local/app/book/book.dart';
+import 'presentation/local/app/categories/categories.dart';
+import 'presentation/local/app/search/search.dart';
+import 'presentation/local/controller/controller.dart';
 
-void main() {
-  runApp(Booknote());
-}
+void main() => runApp(Booknote());
 
 class Booknote extends StatelessWidget {
   // This widget is the root of my application.
   @override
   Widget build(BuildContext context) {
     // User data goes down the Stream using Multiprovider
-    // I can configure streams as many as I want
     return MultiProvider(
       providers: [
         StreamProvider<CategoriesData>.value(
-          value: DatabaseService().userCategories,
+          value: DatabaseService().categories,
         ),
         StreamProvider<QuerySnapshot>.value(
-          value: DatabaseService().userBooks,
+          value: DatabaseService().books,
         ),
-        // to be continued
+        StreamProvider<AppUser>.value(
+          value: AuthService().user,
+        ),
       ],
       child: MaterialApp(
         // remove debug banner
         debugShowCheckedModeBanner: false,
         builder: (context, child) {
           return ScrollConfiguration(
-            // removing  GlowingOverscrollIndicator
+            // remove GlowingOverscrollIndicator
             behavior: CustomScrollBehavior(),
             child: child,
           );
@@ -47,8 +50,7 @@ class Booknote extends StatelessWidget {
           fontFamily: 'Lato',
           accentColor: Colors.grey,
         ),
-        // initialRoute: Bookshelf.routeName,
-        initialRoute: BookEditor.routeName,
+        initialRoute: Controller.routeName,
         routes: {
           Bookshelf.routeName: (context) => Bookshelf(),
           Book.routeName: (context) => Book(),
@@ -56,7 +58,9 @@ class Booknote extends StatelessWidget {
           EmojiPicker.routeName: (context) => EmojiPicker(),
           Search.routeName: (context) => Search(),
           BookCover.routeName: (context) => BookCover(),
-          BookEditor.routeName: (context) => BookEditor()
+          BookEditor.routeName: (context) => BookEditor(),
+          Authentication.routeName: (context) => Authentication(),
+          Controller.routeName: (context) => Controller()
         },
       ),
     );
