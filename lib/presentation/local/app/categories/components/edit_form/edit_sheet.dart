@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'delete_button.dart';
 import 'edit_form.dart';
 
-void showSettingsPanel(context, item, categories) {
+void showSettingsPanel(context, item, categories, uid) {
   showModalBottomSheet(
     context: context,
     backgroundColor: Colors.transparent,
@@ -38,7 +38,7 @@ void showSettingsPanel(context, item, categories) {
                   }
 
                   // update Firestore
-                  DatabaseService().updateCategories(categories);
+                  DatabaseService(uid: uid).updateCategories(categories);
                   Navigator.pop(context);
                 },
               ),
@@ -50,6 +50,7 @@ void showSettingsPanel(context, item, categories) {
                 child: EditForm(
                   item: item,
                   categories: categories,
+                  uid: uid,
                 ),
               ),
             ],

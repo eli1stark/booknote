@@ -1,5 +1,7 @@
+import 'package:booknote/domain/auth/user.dart';
 import 'package:booknote/infrastructure/database/database.dart';
 import 'package:booknote/presentation/global/theme/constants.dart';
+import 'package:provider/provider.dart';
 import '../../../emoji_picker/emoji_picker.dart';
 import 'package:flutter/material.dart';
 
@@ -52,6 +54,9 @@ class _AddFormState extends State<AddForm> {
 
   @override
   Widget build(BuildContext context) {
+    // get user id
+    String uid = Provider.of<AppUser>(context).uid;
+
     return Form(
       key: _formKey,
       child: Column(
@@ -110,7 +115,7 @@ class _AddFormState extends State<AddForm> {
                 widget.categories.add(_item);
 
                 // update Firestore
-                DatabaseService().addCategory(
+                DatabaseService(uid: uid).addCategory(
                   widget.categories,
                   _item['id'],
                 );

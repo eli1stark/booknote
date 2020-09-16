@@ -1,4 +1,3 @@
-import 'package:booknote/domain/categories/categories.dart';
 import 'package:booknote/infrastructure/api/methods_api.dart';
 import 'package:booknote/presentation/global/components/alert_info.dart';
 import 'package:booknote/presentation/global/components/loader.dart';
@@ -6,12 +5,16 @@ import 'package:flutter/material.dart';
 import 'components/app_bar.dart';
 import 'components/divider.dart';
 import 'components/container/container.dart';
-import 'package:provider/provider.dart';
 import 'components/helpers.dart';
+
+class SearchArgument {
+  SearchArgument(this.categories);
+  List categories;
+}
 
 class Search extends StatefulWidget {
   static const routeName = '/search';
-
+  
   @override
   _SearchState createState() => _SearchState();
 }
@@ -20,7 +23,7 @@ var resultFromAPI;
 
 bool isLoading = false;
 
-// categories from databse
+// categories from database
 var categories;
 
 class _SearchState extends State<Search> {
@@ -28,6 +31,9 @@ class _SearchState extends State<Search> {
   Widget build(BuildContext context) {
     // check size of the user's phone
     Size size = MediaQuery.of(context).size;
+
+    // Get argument('categories') from Bookshelf page
+    SearchArgument arg = ModalRoute.of(context).settings.arguments;
 
     return WillPopScope(
       // on Android back button
@@ -58,12 +64,6 @@ class _SearchState extends State<Search> {
 
                 // get Result from the Google API
                 resultFromAPI = await getBooksFromGoogleApi(input);
-
-                // get categories from the Stream(from the Database)
-                // listen: false, because I don't need to listen for the Stream
-                // becasue I need this value only once and it won't change on this page
-                categories = Provider.of<CategoriesData>(context, listen: false)
-                    .categories;
 
                 // end Loading
                 setState(() => isLoading = false);
@@ -112,7 +112,7 @@ class _SearchState extends State<Search> {
                                                     result['volumeInfo'],
                                                   ),
                                                   bookID: result['id'],
-                                                  categories: categories,
+                                                  categories: arg.categories,
                                                 ),
                                                 SearchResultDivider(),
                                               ],

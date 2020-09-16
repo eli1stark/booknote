@@ -1,3 +1,4 @@
+import 'package:booknote/domain/auth/user.dart';
 import 'package:booknote/domain/categories/categories.dart';
 import 'package:booknote/infrastructure/database/database.dart';
 import 'package:booknote/presentation/global/components/big_title.dart';
@@ -22,14 +23,14 @@ class _CategoriesState extends State<Categories> {
   Widget build(BuildContext context) {
     // check size of the user's phone
     Size size = MediaQuery.of(context).size;
+    // get user id
+    String uid = Provider.of<AppUser>(context).uid;
 
     // Checking whether data arrived
     if (Provider.of<CategoriesData>(context) != null) {
       // Getting data from the Stream using Provider
       var categories = Provider.of<CategoriesData>(context).categories;
       int idCounter = Provider.of<CategoriesData>(context).idCounter;
-
-      print(categories);
 
       return Scaffold(
         backgroundColor: Colors.white,
@@ -79,7 +80,7 @@ class _CategoriesState extends State<Categories> {
                           },
                           title: item['title'],
                           onEdit: () =>
-                              showSettingsPanel(context, item, categories),
+                              showSettingsPanel(context, item, categories, uid),
                         ),
                       ),
                   ],
@@ -100,7 +101,7 @@ class _CategoriesState extends State<Categories> {
                       }
 
                       // update Firestore
-                      DatabaseService().updateCategories(categories);
+                      DatabaseService(uid: uid).updateCategories(categories);
                     });
                   },
                 ),

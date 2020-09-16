@@ -16,12 +16,12 @@ class AuthService {
     }
   }
 
-  /// update user stream if user signed in/up/out
+  /// [STREAM] update user stream if user signed in/up/out
   Stream<AppUser> get user {
     return _auth.onAuthStateChanged.map(_userFromFirebaseUser);
   }
 
-  /// register with email and password
+  /// [sign up] with email and password
   Future signUpWithEmailAndPassword(String email, String password) async {
     try {
       AuthResult result = await _auth.createUserWithEmailAndPassword(
@@ -41,7 +41,7 @@ class AuthService {
     }
   }
 
-  /// sign in with email and password
+  /// [sign in] with email and password
   Future signInWithEmailAndPassword(String email, String password) async {
     try {
       AuthResult result = await _auth.signInWithEmailAndPassword(
@@ -57,7 +57,7 @@ class AuthService {
     }
   }
 
-  /// sign out
+  /// [sign out]
   Future signOut() async {
     try {
       return await _auth.signOut();

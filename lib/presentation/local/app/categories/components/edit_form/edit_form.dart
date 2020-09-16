@@ -6,9 +6,11 @@ class EditForm extends StatefulWidget {
   EditForm({
     this.item,
     this.categories,
+    this.uid,
   });
   final Map item;
   final List categories;
+  final String uid;
 
   @override
   _EditFormState createState() => _EditFormState();
@@ -20,7 +22,7 @@ class _EditFormState extends State<EditForm> {
   @override
   Widget build(BuildContext context) {
     // check size of the user's phone
-    // Size size = MediaQuery.of(context).size;
+    Size size = MediaQuery.of(context).size;
 
     return Form(
       key: _formKey,
@@ -37,10 +39,8 @@ class _EditFormState extends State<EditForm> {
             initialValue: widget.item['title'],
             textCapitalization: TextCapitalization.sentences,
             decoration: textInputDecoration,
-            validator: (value) =>
-                value.isEmpty ? 'Please enter text' : null,
-            onChanged: (value) =>
-                setState(() => widget.item['title'] = value),
+            validator: (value) => value.isEmpty ? 'Please enter text' : null,
+            onChanged: (value) => setState(() => widget.item['title'] = value),
           ),
           SizedBox(height: 20.0),
           RaisedButton(
@@ -57,7 +57,7 @@ class _EditFormState extends State<EditForm> {
                 widget.categories[widget.item['indexKey']] = widget.item;
 
                 // update Firestore
-                DatabaseService().updateCategories(widget.categories);
+                DatabaseService(uid: widget.uid).updateCategories(widget.categories);
                 Navigator.pop(context);
               }
             },

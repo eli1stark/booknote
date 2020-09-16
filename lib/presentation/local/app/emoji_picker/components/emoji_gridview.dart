@@ -1,3 +1,6 @@
+import 'package:booknote/domain/auth/user.dart';
+import 'package:provider/provider.dart';
+
 import '../../../../../infrastructure/database/database.dart';
 import 'package:flutter/material.dart';
 
@@ -20,9 +23,12 @@ class EmojiGridView extends StatelessWidget {
 
   /// Can be only 'add' or 'update'
   final String status;
-  
+
   @override
   Widget build(BuildContext context) {
+    // get user id
+    String uid = Provider.of<AppUser>(context).uid;
+    
     return GridView.count(
       crossAxisCount: 7,
       padding: const EdgeInsets.only(
@@ -54,7 +60,7 @@ class EmojiGridView extends StatelessWidget {
                 categories[item['indexKey']] = item;
 
                 // update Firestore
-                DatabaseService().updateCategories(categories);
+                DatabaseService(uid: uid).updateCategories(categories);
                 Navigator.pop(context);
               } else if (status == 'add') {
                 // go back to the AddForm()

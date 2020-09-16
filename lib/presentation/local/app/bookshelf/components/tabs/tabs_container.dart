@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import '../../../../../global/components/tab_bar.dart';
+import 'custom_tab.dart';
 
 class TabsContainer extends StatelessWidget {
   const TabsContainer({
     @required this.controller,
-    @required this.tabs,
+    @required this.categories,
   });
 
   final TabController controller;
-  final List<Widget> tabs;
+  final List categories;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,12 @@ class TabsContainer extends StatelessWidget {
       color: Colors.white,
       child: CustomTabBar(
         controller: controller,
-        tabs: tabs,
+        tabs: [
+          for (Map category in categories)
+            CustomTab(
+              '${category['emoji'] + category['title']}',
+            ),
+        ],
       ),
     );
   }

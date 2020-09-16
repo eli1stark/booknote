@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:meta/meta.dart';
-
 import 'package:booknote/domain/categories/categories.dart';
 
 class DatabaseService {
@@ -29,7 +28,6 @@ class DatabaseService {
 
   /// [CATEGORIES] categories from snapshot
   CategoriesData _categoriesFromSnapshot(DocumentSnapshot snapshot) {
-    print(snapshot.data);
     return CategoriesData(
       categories: snapshot.data['categories'],
       idCounter: snapshot.data['categoryIdCounter'],
