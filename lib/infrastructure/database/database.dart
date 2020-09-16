@@ -29,6 +29,7 @@ class DatabaseService {
 
   /// [CATEGORIES] categories from snapshot
   CategoriesData _categoriesFromSnapshot(DocumentSnapshot snapshot) {
+    print(snapshot.data);
     return CategoriesData(
       categories: snapshot.data['categories'],
       idCounter: snapshot.data['categoryIdCounter'],

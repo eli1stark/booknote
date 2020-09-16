@@ -1,4 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'domain/auth/user.dart';
+import 'domain/categories/categories.dart';
+import 'infrastructure/auth/auth.dart';
+import 'infrastructure/database/database.dart';
 import 'presentation/global/theme/scroll_behavior.dart';
 import 'presentation/local/app/bookshelf/bookshelf.dart';
 import 'presentation/local/auth/authentication.dart';
@@ -16,33 +22,47 @@ class Booknote extends StatelessWidget {
   // This widget is the root of my application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      // remove debug banner
-      debugShowCheckedModeBanner: false,
-      builder: (context, child) {
-        return ScrollConfiguration(
-          // remove GlowingOverscrollIndicator
-          behavior: CustomScrollBehavior(),
-          child: child,
-        );
-      },
-      theme: ThemeData(
-        brightness: Brightness.light,
-        fontFamily: 'Lato',
-        accentColor: Colors.grey,
+    // User data goes down the Stream using Multiprovider
+    return MultiProvider(
+      providers: [
+        StreamProvider<CategoriesData>.value(
+          value: DatabaseService().categories,
+        ),
+        StreamProvider<QuerySnapshot>.value(
+          value: DatabaseService().books,
+        ),
+        StreamProvider<AppUser>.value(
+          value: AuthService().user,
+        ),
+      ],
+      child: MaterialApp(
+        // remove debug banner
+        debugShowCheckedModeBanner: false,
+        builder: (context, child) {
+          return ScrollConfiguration(
+            // remove GlowingOverscrollIndicator
+            behavior: CustomScrollBehavior(),
+            child: child,
+          );
+        },
+        theme: ThemeData(
+          brightness: Brightness.light,
+          fontFamily: 'Lato',
+          accentColor: Colors.grey,
+        ),
+        initialRoute: Controller.routeName,
+        routes: {
+          Bookshelf.routeName: (context) => Bookshelf(),
+          Book.routeName: (context) => Book(),
+          Categories.routeName: (context) => Categories(),
+          EmojiPicker.routeName: (context) => EmojiPicker(),
+          Search.routeName: (context) => Search(),
+          BookCover.routeName: (context) => BookCover(),
+          BookEditor.routeName: (context) => BookEditor(),
+          Authentication.routeName: (context) => Authentication(),
+          Controller.routeName: (context) => Controller()
+        },
       ),
-      initialRoute: Controller.routeName,
-      routes: {
-        Bookshelf.routeName: (context) => Bookshelf(),
-        Book.routeName: (context) => Book(),
-        Categories.routeName: (context) => Categories(),
-        EmojiPicker.routeName: (context) => EmojiPicker(),
-        Search.routeName: (context) => Search(),
-        BookCover.routeName: (context) => BookCover(),
-        BookEditor.routeName: (context) => BookEditor(),
-        Authentication.routeName: (context) => Authentication(),
-        Controller.routeName: (context) => Controller()
-      },
     );
   }
 }
