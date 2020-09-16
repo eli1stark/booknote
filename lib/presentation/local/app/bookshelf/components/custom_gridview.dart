@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CustomGridView extends StatefulWidget {
-  CustomGridView({
-    @required this.books,
-  });
+  CustomGridView(this.books);
 
   final List<Widget> books;
 
@@ -11,13 +9,18 @@ class CustomGridView extends StatefulWidget {
   _CustomGridViewState createState() => _CustomGridViewState();
 }
 
+/// AutomaticKeepAliveClientMixin helps to not rebuild
+/// Grid every time it appears on the screen.
+/// It builds it only once.
 class _CustomGridViewState extends State<CustomGridView>
     with AutomaticKeepAliveClientMixin {
+  // getter for AutomaticKeepAliveClientMixin
   @override
   bool get wantKeepAlive => true;
 
   @override
   Widget build(BuildContext context) {
+    // build for AutomaticKeepAliveClientMixin
     super.build(context);
     return Card(
       child: GridView.count(

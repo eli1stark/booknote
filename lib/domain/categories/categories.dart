@@ -4,6 +4,6 @@ class CategoriesData {
     this.idCounter,
   });
 
-  final List categories;
+  final List<Map> categories;
   final int idCounter;
 }

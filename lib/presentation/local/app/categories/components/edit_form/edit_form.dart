@@ -1,4 +1,4 @@
-import 'package:booknote/infrastructure/database/database2.dart';
+import 'package:booknote/infrastructure/database/database.dart';
 import 'package:booknote/presentation/global/theme/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -57,7 +57,7 @@ class _EditFormState extends State<EditForm> {
                 widget.categories[widget.item['indexKey']] = widget.item;
 
                 // update Firestore
-                DatabaseService1().updateCategories(widget.categories);
+                DatabaseService().updateCategories(widget.categories);
                 Navigator.pop(context);
               }
             },

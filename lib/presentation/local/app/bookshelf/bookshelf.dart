@@ -4,6 +4,7 @@ import 'components/app_bar.dart';
 import 'components/custom_gridview.dart';
 import 'components/image_frame.dart';
 import 'components/navigation/nav_menu.dart';
+import 'components/tabs/custom_tab.dart';
 import 'components/tabs/tab_divider.dart';
 import 'components/tabs/tabs_container.dart';
 
@@ -32,12 +33,13 @@ class Bookshelf extends StatelessWidget {
             ),
             TabsContainer(
               controller: _controller,
+              tabs: tabs,
             ),
             TabDivider(),
             Expanded(
               child: TabBarView(
                 children: [
-                  for (int i = 0; i < 2; i++) CustomGridView(books: books)
+                  for (int i = 0; i < 2; i++) CustomGridView(books)
                 ],
               ),
             ),
@@ -48,6 +50,12 @@ class Bookshelf extends StatelessWidget {
   }
 }
 
+// MOCK:
+List<Widget> tabs = [
+  CustomTab('Text1'),
+  CustomTab('Text2'),
+];
+// MOCK:
 List<Widget> books = [
   ImageFrame(
     imagePath: 'images/samples/book-1.jpeg',

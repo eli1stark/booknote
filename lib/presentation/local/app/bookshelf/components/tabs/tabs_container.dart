@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import '../../../../../global/components/tab_bar.dart';
-import 'custom_tab.dart';
 
 class TabsContainer extends StatelessWidget {
   const TabsContainer({
     @required this.controller,
+    @required this.tabs,
   });
 
   final TabController controller;
-  
+  final List<Widget> tabs;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -18,10 +19,7 @@ class TabsContainer extends StatelessWidget {
       color: Colors.white,
       child: CustomTabBar(
         controller: controller,
-        tabs: [
-          CustomTab('Text1'),
-          CustomTab('Text2'),
-        ],
+        tabs: tabs,
       ),
     );
   }

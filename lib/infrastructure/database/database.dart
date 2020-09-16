@@ -1,75 +1,95 @@
-import 'package:booknote/domain/categories/categories.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:meta/meta.dart';
+
+import 'package:booknote/domain/categories/categories.dart';
 
 class DatabaseService {
-  // collection reference
-  // final CollectionReference users = Firestore.instance.collection('users');
+  DatabaseService({this.uid});
 
-  // CATEGORIES
-  // document reference (categories)
-  final DocumentReference _categories = Firestore.instance
-      .document('/users/5wONbu7gzq4GPbsvxMj8/categories/ylau1HB2GwZddaCMWO6n');
+  // user ID
+  final String uid;
 
-  /// categories from snapshot
+  // users collection reference
+  final CollectionReference users = Firestore.instance.collection('users');
+
+  /// [SIGNUP] Setting data for the new user
+  Future setUserData() async {
+    await users.document(uid).setData({
+      'categories': [
+        {
+          'emoji': '📚',
+          'indexKey': 0,
+          'title': 'Books',
+          'id': 0,
+        },
+      ],
+      'categoryIdCounter': 0,
+    });
+  }
+
+  /// [CATEGORIES] categories from snapshot
   CategoriesData _categoriesFromSnapshot(DocumentSnapshot snapshot) {
     return CategoriesData(
       categories: snapshot.data['categories'],
-      idCounter: snapshot.data['idCounter'],
+      idCounter: snapshot.data['categoryIdCounter'],
     );
   }
 
-  /// get categories (Stream)
-  Stream<CategoriesData> get userCategories {
-    return _categories.snapshots().map(_categoriesFromSnapshot);
+  /// [CATEGORIES] get categories
+  Stream<CategoriesData> get categories {
+    return users.document(uid).snapshots().map(_categoriesFromSnapshot);
   }
 
-  /// update categories
-  updateCategories(List newCategories) {
-    _categories.updateData({
+  /// [CATEGORIES] update categories (onReorder)
+  void updateCategories(List newCategories) {
+    users.document(uid).updateData({
       'categories': newCategories,
     });
-    print('success');
   }
 
-  /// add new category (with Counter)
-  addCategory(List newCategories, int newCounter) {
-    _categories.updateData({
+  /// [CATEGORIES] add new category
+  void addCategory(List newCategories, int newCounter) {
+    users.document(uid).updateData({
       'categories': newCategories,
-      'idCounter': newCounter,
+      'categoryIdCounter': newCounter,
     });
-    print('counter success');
   }
 
-  // BOOKSHELF
-  // subcollection reference (categories)
-  final CollectionReference _books =
-      Firestore.instance.collection('/users/5wONbu7gzq4GPbsvxMj8/books');
-
-  // get all books from collection
-  Stream<QuerySnapshot> get userBooks {
-    return _books.snapshots();
+  /// [BOOKSHELF] get all books from collection
+  Stream<QuerySnapshot> get books {
+    return users.document(uid).collection('books').snapshots();
   }
 
-  // SEARCH
-  // add new book
-  addNewBook(
-    int categoryID,
-    String networkImage,
-    String title,
-    String authors,
-    String pages,
-    String published,
-    String bookID,
-  ) {
-    _books.add({
+  /// [SEARCH] add new book
+  void addNewBook({
+    @required int categoryID,
+    @required String bookID,
+    @required String title,
+    @required String authors,
+    @required String publisher,
+    @required String categories,
+    @required String published,
+    @required String pages,
+    @required String linkToNetworkLargeCover,
+    @required String linkToNetworkThumbnailCover,
+    @required String pathToLocalLargeCover,
+    @required String pathToLocalThumbnailCover,
+    @required String pathToLocalCustomCover,
+  }) {
+    users.document(uid).collection('books').add({
       'categoryID': categoryID,
-      'networkImage': networkImage,
+      'bookID': bookID,
       'title': title,
       'authors': authors,
-      'pages': pages,
+      'publisher': publisher,
+      'categories': categories,
       'published': published,
-      'googleBookID': bookID,
+      'pages': pages,
+      'linkToNetworkLargeCover': linkToNetworkLargeCover,
+      'linkToNetworkThumbnailCover': linkToNetworkThumbnailCover,
+      'pathToLocalLargeCover': pathToLocalLargeCover,
+      'pathToLocalThumbnailCover': pathToLocalThumbnailCover,
+      'pathToLocalCustomCover': pathToLocalCustomCover,
     });
   }
 }
-

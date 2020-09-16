@@ -1,5 +1,5 @@
 import 'package:booknote/domain/categories/categories.dart';
-import 'package:booknote/infrastructure/database/database2.dart';
+import 'package:booknote/infrastructure/database/database.dart';
 import 'package:booknote/presentation/global/components/big_title.dart';
 import 'package:booknote/presentation/global/components/loader.dart';
 import '../emoji_picker/emoji_picker.dart';
@@ -100,7 +100,7 @@ class _CategoriesState extends State<Categories> {
                       }
 
                       // update Firestore
-                      DatabaseService1().updateCategories(categories);
+                      DatabaseService().updateCategories(categories);
                     });
                   },
                 ),

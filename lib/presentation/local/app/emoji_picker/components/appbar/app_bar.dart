@@ -1,4 +1,4 @@
-import 'package:booknote/infrastructure/database/database2.dart';
+import 'package:booknote/infrastructure/database/database.dart';
 import 'package:flutter/material.dart';
 import 'appbar_button.dart';
 import 'appbar_text.dart';
@@ -36,7 +36,7 @@ class EmojiPickerAppBar extends StatelessWidget {
               categories[item['indexKey']] = item;
 
               // update Firestore
-              DatabaseService1().updateCategories(categories);
+              DatabaseService().updateCategories(categories);
               Navigator.pop(context);
             } else if (status == 'add') {
               // go back to the AddForm() with Item(Map)

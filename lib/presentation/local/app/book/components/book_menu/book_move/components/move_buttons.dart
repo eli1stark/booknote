@@ -1,4 +1,4 @@
-import '../../../../../bookshelf/bookshelf1.dart';
+import '../../../../../bookshelf/bookshelf.dart';
 import 'package:flutter/material.dart';
 
 class BookMoveButtons extends StatelessWidget {
@@ -37,7 +37,7 @@ class BookMoveButtons extends StatelessWidget {
           // color: Colors.grey[300],
           onPressed: () {
             // TODO move the book
-            Navigator.pushNamed(context, Bookshelf1.routeName);
+            Navigator.pushNamed(context, Bookshelf.routeName);
           },
         ),
       ],

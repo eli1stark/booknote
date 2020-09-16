@@ -7,7 +7,7 @@ import 'components/app_bar.dart';
 import 'components/divider.dart';
 import 'components/container/container.dart';
 import 'package:provider/provider.dart';
-import 'components/utils.dart';
+import 'components/helpers.dart';
 
 class Search extends StatefulWidget {
   static const routeName = '/search';

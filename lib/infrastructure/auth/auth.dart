@@ -1,6 +1,7 @@
 import 'package:booknote/domain/auth/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
+import '../database/database.dart';
 import 'error_handler.dart';
 
 class AuthService {
@@ -28,6 +29,10 @@ class AuthService {
         password: password,
       );
       FirebaseUser user = result.user;
+
+      // create a new document for the user
+      await DatabaseService(uid: user.uid).setUserData();
+
       return _userFromFirebaseUser(user);
     } on PlatformException catch (error) {
       return signUpErrorHandler(error);
@@ -57,7 +62,6 @@ class AuthService {
     try {
       return await _auth.signOut();
     } catch (error) {
-      print('CAUGHT ERROR: ${error.toString()}');
       return null;
     }
   }
