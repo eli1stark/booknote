@@ -30,7 +30,11 @@ class SearchResult extends StatelessWidget {
             // check whether the search found something
             if (resultFromAPI['totalItems'] != 0) {
               return ListView(
-                children: processResultFromAPI(resultFromAPI, categories, uid),
+                children: processResultFromAPI(
+                  resultFromAPI,
+                  categories,
+                  uid,
+                ),
               );
             } else {
               return AlertInfo(

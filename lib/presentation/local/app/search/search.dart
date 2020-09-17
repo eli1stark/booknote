@@ -21,7 +21,7 @@ class Search extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Get argument('categories') from Bookshelf page
+    // Get arguments('categories' and 'uid') from Bookshelf page
     SearchArgument arg = ModalRoute.of(context).settings.arguments;
 
     return BlocProvider<SearchStateCubit>(
@@ -63,8 +63,3 @@ class Search extends StatelessWidget {
     );
   }
 }
-
-// TODO remove last divider in the search listview
-// FIXME some problem when I type some of the words I getting white screen
-// but should get result or alert info that image is not found
-// screenshots on the phone
