@@ -4,21 +4,21 @@ import 'package:auto_size_text/auto_size_text.dart';
 class TitleAuthorText extends StatelessWidget {
   const TitleAuthorText({
     @required this.text,
-    @required this.fontSize,
+    this.title = false,
   });
 
   final String text;
-  final double fontSize;
+  final bool title;
 
   @override
   Widget build(BuildContext context) {
     return AutoSizeText(
       text,
-      maxLines: 2,
+      maxLines: title ? 2 : 1,
       overflow: TextOverflow.ellipsis,
       style: TextStyle(
         fontWeight: FontWeight.bold,
-        fontSize: fontSize,
+        fontSize: title ? 17.0 : 15.0,
       ),
     );
   }

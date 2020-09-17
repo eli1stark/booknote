@@ -66,14 +66,16 @@ class DatabaseService {
     @required String title,
     @required String authors,
     @required String publisher,
-    @required String categories,
+    @required String categoryType,
     @required String published,
-    @required String pages,
+    @required int pages,
     @required String linkToNetworkLargeCover,
     @required String linkToNetworkThumbnailCover,
     @required String pathToLocalLargeCover,
     @required String pathToLocalThumbnailCover,
     @required String pathToLocalCustomCover,
+    @required int pagesRead,
+    @required String pathToNote,
   }) {
     users.document(uid).collection('books').add({
       'categoryID': categoryID,
@@ -81,7 +83,7 @@ class DatabaseService {
       'title': title,
       'authors': authors,
       'publisher': publisher,
-      'categories': categories,
+      'categoryType': categoryType,
       'published': published,
       'pages': pages,
       'linkToNetworkLargeCover': linkToNetworkLargeCover,
@@ -89,6 +91,8 @@ class DatabaseService {
       'pathToLocalLargeCover': pathToLocalLargeCover,
       'pathToLocalThumbnailCover': pathToLocalThumbnailCover,
       'pathToLocalCustomCover': pathToLocalCustomCover,
+      'pagesRead': pagesRead,
+      'pathToNote': pathToNote,
     });
   }
 }

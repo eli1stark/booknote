@@ -1,16 +1,12 @@
+import 'package:booknote/domain/search/result_from_api.dart';
 import 'package:flutter/material.dart';
 import 'add_form.dart';
 
-showAddPopOut(
-  BuildContext context,
-  Size size,
-  String title,
-  String authors,
-  String pages,
-  String published,
-  String bookID,
-  List categories,
-) {
+showAddPopOut({
+  @required BuildContext context,
+  @required List categories,
+  @required ResultFromAPI resultFromAPI,
+}) {
   return showDialog(
     context: context,
     builder: (context) {
@@ -25,13 +21,8 @@ showAddPopOut(
             horizontal: 40.0,
           ),
           child: AddBookForm(
-            size: size,
-            title: title,
-            authors: authors,
-            pages: pages,
-            published: published,
-            bookID: bookID,
             categories: categories,
+            resultFromAPI: resultFromAPI,
           ),
         ),
       );
@@ -39,4 +30,4 @@ showAddPopOut(
   );
 }
 
-// TODO refactor to genral components because 'categories' also has the same functionality
+// TODO refactor to general components because 'categories' also has the same functionality

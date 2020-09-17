@@ -3,7 +3,8 @@ import 'api_key.dart';
 
 const bookAPI = 'https://www.googleapis.com/books/v1/volumes';
 
-Future<dynamic> getBooksFromGoogleApi(String input) async {
+/// Return Map which has property "items" which is a List of Maps(books)
+Future<Map> getBooksFromGoogleApi(String input) async {
   var url =
       '$bookAPI?q=intitle:$input&inauthor:$input&maxResults=40&langRestrict=en&printType=books&key=$apiKey';
   NetworkHelper networkHelper = NetworkHelper(url);
@@ -13,7 +14,8 @@ Future<dynamic> getBooksFromGoogleApi(String input) async {
   return books;
 }
 
-Future<dynamic> searchByID(String input) async {
+/// Return single Map(book)
+Future<Map> searchByID(String input) async {
   var url = '$bookAPI/$input?key=$apiKey';
   NetworkHelper networkHelper = NetworkHelper(url);
 

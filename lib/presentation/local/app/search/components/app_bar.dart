@@ -2,7 +2,10 @@ import 'package:booknote/presentation/global/theme/constants.dart';
 import 'package:flutter/material.dart';
 
 class SearchAppBar extends StatelessWidget {
-  SearchAppBar({this.onPressed, this.onFieldSubmitted});
+  SearchAppBar({
+    this.onPressed,
+    this.onFieldSubmitted,
+  });
 
   final Function onPressed;
   final Function onFieldSubmitted;

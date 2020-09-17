@@ -1,27 +1,17 @@
+import 'package:booknote/domain/search/result_from_api.dart';
 import 'package:booknote/infrastructure/api/methods_api.dart';
 import 'package:booknote/infrastructure/database/database.dart';
 import 'package:booknote/presentation/local/app/bookshelf/bookshelf.dart';
 import 'package:flutter/material.dart';
-import '../../helpers.dart';
 
 class AddBookForm extends StatefulWidget {
   AddBookForm({
-    @required this.size,
-    @required this.title,
-    @required this.authors,
-    @required this.pages,
-    @required this.published,
-    @required this.bookID,
     @required this.categories,
+    @required this.resultFromAPI,
   });
 
-  final Size size;
-  final String title;
-  final String authors;
-  final String pages;
-  final String published;
-  final String bookID;
   final List categories;
+  final ResultFromAPI resultFromAPI;
 
   @override
   _AddBookFormState createState() => _AddBookFormState();
@@ -105,11 +95,11 @@ class _AddBookFormState extends State<AddBookForm> {
               }
 
               // get selflink of the book through API call to load better quality images
-              var result = await searchByID(widget.bookID);
+              var result = await searchByID(widget.resultFromAPI.bookID);
 
               // iterate through all available formats and return the best
-              String newImage =
-                  processSelflinkImages(result['volumeInfo']['imageLinks']);
+              // String newImage =
+              //     processSelflinkImages(result['volumeInfo']['imageLinks']);
 
               // add new book to the database
               // TODO fix

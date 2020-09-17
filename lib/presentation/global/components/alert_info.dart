@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 
 class AlertInfo extends StatelessWidget {
-  AlertInfo({this.image, this.text, this.size});
+  AlertInfo({
+    this.image,
+    this.text,
+  });
 
   final String image;
   final String text;
-  final Size size;
 
   @override
   Widget build(BuildContext context) {
+    // check size of the user's phone
+    Size size = MediaQuery.of(context).size;
+
     return Center(
       child: Container(
         height: size.height * 0.55,

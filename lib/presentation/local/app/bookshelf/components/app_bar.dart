@@ -1,6 +1,5 @@
 import '../../search/search.dart';
 import 'package:flutter/material.dart';
-import '../../search/search.dart';
 
 AppBar bookshelfAppBar(context, List categories) {
   return AppBar(
