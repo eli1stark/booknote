@@ -1,16 +1,23 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:booknote/domain/search/result_from_api.dart';
 import 'package:booknote/infrastructure/api/methods_api.dart';
 import 'package:booknote/infrastructure/database/database.dart';
+import 'package:booknote/presentation/global/components/loader.dart';
 import 'package:booknote/presentation/local/app/bookshelf/bookshelf.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../../../helpers.dart';
+import '../add_button.dart';
 
 class AddBookForm extends StatefulWidget {
   AddBookForm({
     @required this.categories,
+    @required this.uid,
     @required this.resultFromAPI,
   });
 
   final List categories;
+  final String uid;
   final ResultFromAPI resultFromAPI;
 
   @override
@@ -18,115 +25,90 @@ class AddBookForm extends StatefulWidget {
 }
 
 class _AddBookFormState extends State<AddBookForm> {
-  // value of the dropdown button
-  String dropdownValue;
-  // for validation purposes (default to true)
-  bool categoryWasChoosen = true;
+  // default to the first category in the list
+  int chosenCategoryIndex = 0;
+
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        DropdownButton<String>(
-          value: dropdownValue,
-          isExpanded: true,
-          hint: Text(
-            'Select category',
-            style: TextStyle(
-              fontSize: 18.0,
+    ResultFromAPI resultFromAPI = widget.resultFromAPI;
+
+    if (isLoading) {
+      return Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Loader(),
+        ],
+      );
+    } else {
+      return Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          Container(
+            height: 90,
+            width: 200,
+            child: CupertinoPicker(
+              itemExtent: 30,
+              onSelectedItemChanged: (int index) =>
+                  setState(() => chosenCategoryIndex = index),
+              children: [
+                for (Map category in widget.categories)
+                  Center(
+                    child: AutoSizeText(
+                      category['emoji'] + category['title'],
+                      maxLines: 1,
+                    ),
+                  )
+              ],
+              diameterRatio: 1,
+              scrollController: FixedExtentScrollController(
+                initialItem: chosenCategoryIndex,
+              ),
             ),
           ),
-          icon: Icon(
-            Icons.arrow_downward,
-          ),
-          iconSize: 26,
-          elevation: 16,
-          style: TextStyle(color: Colors.black),
-          underline: Container(
-            height: 2,
-            color: Colors.grey,
-          ),
-          onChanged: (String newValue) {
-            setState(() {
-              dropdownValue = newValue;
-              categoryWasChoosen = true;
-            });
-          },
-          items: [
-            for (Map category in widget.categories)
-              DropdownMenuItem<String>(
-                value: category['emoji'] + category['title'],
-                child: Text(
-                  category['emoji'] + category['title'],
-                  style: TextStyle(
-                    fontSize: 18.0,
-                  ),
-                ),
-              ),
-          ],
-        ),
-        categoryWasChoosen
-            ? Container()
-            : Text(
-                'Please choose category',
-                style: TextStyle(
-                  color: Colors.red[700],
-                ),
-              ),
-        SizedBox(height: 10.0),
-        RaisedButton(
-          child: Text('Add'),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(5.0),
-          ),
-          onPressed: () async {
-            // validate dropdown button
-            if (dropdownValue == null) {
-              setState(() => categoryWasChoosen = false);
-            } else {
-              int categoryID;
+          SizedBox(height: 10.0),
+          AddBookButton(
+            onPressed: () async {
+              setState(() => isLoading = true);
 
-              // find choosen category through iteration
-              for (Map category in widget.categories) {
-                if (category['emoji'] + category['title'] == dropdownValue) {
-                  categoryID = category['id'];
-                }
-              }
+              // id of the chosen category
+              int categoryID = widget.categories[chosenCategoryIndex]['id'];
 
-              // get selflink of the book through API call to load better quality images
-              var result = await searchByID(widget.resultFromAPI.bookID);
+              // get a Map of the single book by API call using book ID
+              var result = await searchByID(resultFromAPI.bookID);
 
-              // iterate through all available formats and return the best
-              // String newImage =
-              //     processSelflinkImages(result['volumeInfo']['imageLinks']);
+              // get a link of the image larger than thumbnail if its exist
+              String linkToNetworkLargeCover =
+                  processImages(result['volumeInfo'], true);
 
               // add new book to the database
-              // TODO fix
-              // DatabaseService().addNewBook(
-              //   categoryID,
-              //   newImage,
-              //   widget.title,
-              //   widget.authors,
-              //   widget.pages,
-              //   widget.published,
-              //   widget.bookID,
-              // );
-
-              // clear search result
-              // setState(() => resultFromAPI = null);
+              DatabaseService(uid: widget.uid).addNewBook(
+                categoryID: categoryID,
+                bookID: resultFromAPI.bookID,
+                title: resultFromAPI.title,
+                authors: resultFromAPI.authors,
+                publisher: resultFromAPI.publisher,
+                categoryType: resultFromAPI.categoryType,
+                published: resultFromAPI.published,
+                pages: resultFromAPI.pages,
+                linkToNetworkLargeCover: linkToNetworkLargeCover,
+                linkToNetworkThumbnailCover:
+                    resultFromAPI.linkToNetworkThumbnailCover,
+                // these values will be added during usage of the App
+                pathToLocalLargeCover: null,
+                pathToLocalThumbnailCover: null,
+                pathToLocalCustomCover: null,
+                pagesRead: null,
+                pathToNote: null,
+              );
 
               // go to the Bookshelf page
               Navigator.pushNamed(context, Bookshelf.routeName);
-            }
-          },
-        ),
-      ],
-    );
+            },
+          ),
+        ],
+      );
+    }
   }
 }
-
-// TODO prompt user that book is already added if it is. and pop back to search
-// id validatation ->
-// TODO clear search result when added book
-// I probably need notify listeners, to notify search page about value from this page

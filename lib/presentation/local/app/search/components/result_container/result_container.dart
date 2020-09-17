@@ -9,10 +9,12 @@ import 'components/title_author.dart';
 class SearchResultContainer extends StatelessWidget {
   const SearchResultContainer({
     @required this.categories,
+    @required this.uid,
     @required this.resultFromAPI,
   });
 
   final List categories;
+  final String uid;
   final ResultFromAPI resultFromAPI;
 
   @override
@@ -88,6 +90,7 @@ class SearchResultContainer extends StatelessWidget {
                       onPressed: () => showAddPopOut(
                         context: context,
                         categories: categories,
+                        uid: uid,
                         resultFromAPI: resultFromAPI,
                       ),
                     ),

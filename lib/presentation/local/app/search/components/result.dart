@@ -7,9 +7,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'helpers.dart';
 
 class SearchResult extends StatelessWidget {
-  SearchResult(this.categories);
+  SearchResult(
+    this.categories,
+    this.uid,
+  );
 
   final List categories;
+  final String uid;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +30,7 @@ class SearchResult extends StatelessWidget {
             // check whether the search found something
             if (resultFromAPI['totalItems'] != 0) {
               return ListView(
-                children: processResultFromAPI(resultFromAPI, categories),
+                children: processResultFromAPI(resultFromAPI, categories, uid),
               );
             } else {
               return AlertInfo(

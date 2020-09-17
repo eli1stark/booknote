@@ -9,7 +9,6 @@ class ResultFromAPI {
     @required this.categoryType,
     @required this.published,
     @required this.pages,
-    @required this.linkToNetworkLargeCover,
     @required this.linkToNetworkThumbnailCover,
   });
 
@@ -20,6 +19,5 @@ class ResultFromAPI {
   final String categoryType;
   final String published;
   final int pages;
-  final String linkToNetworkLargeCover;
   final String linkToNetworkThumbnailCover;
 }

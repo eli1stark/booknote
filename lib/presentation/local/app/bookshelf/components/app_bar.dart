@@ -1,7 +1,7 @@
 import '../../search/search.dart';
 import 'package:flutter/material.dart';
 
-AppBar bookshelfAppBar(context, List categories) {
+AppBar bookshelfAppBar(context, List categories, String uid) {
   return AppBar(
     elevation: 0,
     backgroundColor: Colors.white,
@@ -33,7 +33,7 @@ AppBar bookshelfAppBar(context, List categories) {
           Navigator.pushNamed(
             context,
             Search.routeName,
-            arguments: SearchArgument(categories),
+            arguments: SearchArgument(categories, uid),
           );
         },
       ),

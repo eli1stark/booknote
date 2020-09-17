@@ -26,7 +26,7 @@ class Bookshelf extends StatelessWidget {
             value: DatabaseService(uid: uid).books,
           ),
         ],
-        child: BookshelfDisplay(),
+        child: BookshelfDisplay(uid),
       );
     } else {
       return Loader();

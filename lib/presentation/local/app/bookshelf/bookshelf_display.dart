@@ -12,6 +12,10 @@ import 'components/tabs/tab_divider.dart';
 import 'components/tabs/tabs_container.dart';
 
 class BookshelfDisplay extends StatelessWidget {
+  BookshelfDisplay(this.uid);
+
+  final String uid;
+
   @override
   Widget build(BuildContext context) {
     if (Provider.of<CategoriesData>(context) != null &&
@@ -29,7 +33,7 @@ class BookshelfDisplay extends StatelessWidget {
         length: categories.length,
         child: Scaffold(
           backgroundColor: Colors.white,
-          appBar: bookshelfAppBar(context, categories),
+          appBar: bookshelfAppBar(context, categories, uid),
           drawer: Drawer(
             child: SafeArea(
               child: NavigationMenu(),

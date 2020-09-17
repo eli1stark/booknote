@@ -6,7 +6,11 @@ import 'result_container/result_container.dart';
 import 'divider.dart';
 
 /// Process resultFromAPI
-List<Widget> processResultFromAPI(Map resultFromAPI, List categories) {
+List<Widget> processResultFromAPI(
+  Map resultFromAPI,
+  List categories,
+  String uid,
+) {
   List<Widget> output = [];
 
   for (Map result in resultFromAPI['items']) {
@@ -20,6 +24,7 @@ List<Widget> processResultFromAPI(Map resultFromAPI, List categories) {
           children: [
             SearchResultContainer(
               categories: categories,
+              uid: uid,
               resultFromAPI: ResultFromAPI(
                 bookID: result['id'],
                 title: processTitle(volumeInfo),
@@ -28,8 +33,6 @@ List<Widget> processResultFromAPI(Map resultFromAPI, List categories) {
                 categoryType: processCategoryType(volumeInfo),
                 published: processPublishedDate(volumeInfo),
                 pages: processPages(volumeInfo),
-                // I'm adding a large cover while adding a book to the bookshelf
-                linkToNetworkLargeCover: null,
                 linkToNetworkThumbnailCover: processImages(volumeInfo, false),
               ),
             ),
@@ -110,8 +113,8 @@ int processPages(Map volumeInfo) {
 }
 
 /// Process [Images] \
-/// Checking existing of images in the result from API and API call by ID. \
-/// I'm getting Large images from single API call by ID \
+/// Checking existing of images in the result from API and API call using ID. \
+/// I'm getting Large images from single API call using ID \
 /// when adding single book to Bookshelf. \
 /// I can't get them from result of 40 books (resultFromAPI). \
 /// IF Large image exists and 'large' is true: \

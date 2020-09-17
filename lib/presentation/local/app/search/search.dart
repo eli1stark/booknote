@@ -7,8 +7,13 @@ import 'components/app_bar.dart';
 import 'components/result.dart';
 
 class SearchArgument {
-  SearchArgument(this.categories);
+  SearchArgument(
+    this.categories,
+    this.uid,
+  );
+
   List categories;
+  String uid;
 }
 
 class Search extends StatelessWidget {
@@ -50,7 +55,7 @@ class Search extends StatelessWidget {
               preferredSize: Size.fromHeight(kToolbarHeight),
             ),
             body: SafeArea(
-              child: SearchResult(arg.categories),
+              child: SearchResult(arg.categories, arg.uid),
             ),
           );
         },

@@ -5,6 +5,7 @@ import 'add_form.dart';
 showAddPopOut({
   @required BuildContext context,
   @required List categories,
+  @required String uid,
   @required ResultFromAPI resultFromAPI,
 }) {
   return showDialog(
@@ -12,9 +13,9 @@ showAddPopOut({
     builder: (context) {
       return Dialog(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30.0),
+          borderRadius: BorderRadius.circular(40.0),
         ),
-        backgroundColor: Colors.grey[200],
+        backgroundColor: Colors.white,
         child: Container(
           padding: EdgeInsets.symmetric(
             vertical: 30.0,
@@ -22,6 +23,7 @@ showAddPopOut({
           ),
           child: AddBookForm(
             categories: categories,
+            uid: uid,
             resultFromAPI: resultFromAPI,
           ),
         ),
