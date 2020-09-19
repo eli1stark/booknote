@@ -1,26 +1,29 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import '../../book/book.dart';
 
 class ImageFrame extends StatelessWidget {
   ImageFrame({
-    this.imagePath,
-    this.networkImage,
+    this.linkPath,
+    this.network,
+    this.book,
   });
 
-  final String imagePath;
-  final bool networkImage;
+  final String linkPath;
+  final bool network;
+  final DocumentSnapshot book;
 
   @override
   Widget build(BuildContext context) {
     return FlatButton(
       highlightColor: Colors.transparent,
       splashColor: Colors.transparent,
-      padding: EdgeInsets.all(0),
+      padding: EdgeInsets.zero,
       onPressed: () {
         Navigator.pushNamed(
           context,
           Book.routeName,
-          arguments: BookArgument(imagePath),
+          arguments: BookArgument(book),
         );
       },
       child: SizedBox.expand(
@@ -35,13 +38,13 @@ class ImageFrame extends StatelessWidget {
           // and show its round corners
           semanticContainer: true,
           clipBehavior: Clip.antiAliasWithSaveLayer,
-          child: networkImage
+          child: network
               ? Image.network(
-                  imagePath,
+                  linkPath,
                   fit: BoxFit.fill,
                 )
               : Image.asset(
-                  imagePath,
+                  linkPath,
                   fit: BoxFit.fill,
                 ),
         ),

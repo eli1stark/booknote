@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/material.dart';
 import '../book_editor/book_editor.dart';
@@ -6,9 +7,9 @@ import 'components/book_frame.dart';
 import 'components/box_button.dart';
 
 class BookBox extends StatelessWidget {
-  BookBox({@required this.imgSrc});
+  BookBox(this.book);
 
-  final String imgSrc;
+  final DocumentSnapshot book;
 
   @override
   Widget build(BuildContext context) {
@@ -33,16 +34,8 @@ class BookBox extends StatelessWidget {
           ),
           Expanded(
             flex: 6,
-            child: Align(
-              alignment: Alignment.topCenter,
-              child: BookFrame(
-                // was asset when I used local images
-                child: Image.network(
-                  imgSrc,
-                  height: size.height * 0.35,
-                  fit: BoxFit.fill,
-                ),
-              ),
+            child: BookFrame(
+              book['currentImage'],
             ),
           ),
           Expanded(

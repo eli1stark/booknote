@@ -1,12 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'components/appbar/app_bar.dart';
 import 'components/book_box/book_box.dart';
 
 class BookArgument {
-  BookArgument(this.path);
+  BookArgument(this.book);
 
-  final String path;
+  final DocumentSnapshot book;
 }
 
 class Book extends StatefulWidget {
@@ -33,7 +34,7 @@ class _BookState extends State<Book> {
       ),
       body: Stack(
         children: <Widget>[
-          BookBox(imgSrc: arg.path),
+          BookBox(arg.book),
           DraggableScrollableSheet(
             initialChildSize: 0.56,
             minChildSize: 0.56,

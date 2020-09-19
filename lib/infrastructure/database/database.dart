@@ -59,7 +59,10 @@ class DatabaseService {
     return users.document(uid).collection('books').snapshots();
   }
 
-  /// [SEARCH] add new book
+  /// [SEARCH] add new book \
+  /// currentImage = {'linkPath': 'Path or Link', 'network': true or false} \
+  /// by default to NetworkLargeCover if it exists, else to NetworkThumbnailCover \
+  /// If user gave storage privilege, image will be cached and local path will be used
   void addNewBook({
     @required int categoryID,
     @required String bookID,
@@ -74,6 +77,7 @@ class DatabaseService {
     @required String pathToLocalLargeCover,
     @required String pathToLocalThumbnailCover,
     @required String pathToLocalCustomCover,
+    @required Map currentImage,
     @required int pagesRead,
     @required String pathToNote,
   }) {
@@ -91,6 +95,7 @@ class DatabaseService {
       'pathToLocalLargeCover': pathToLocalLargeCover,
       'pathToLocalThumbnailCover': pathToLocalThumbnailCover,
       'pathToLocalCustomCover': pathToLocalCustomCover,
+      'currentImage': currentImage,
       'pagesRead': pagesRead,
       'pathToNote': pathToNote,
     });

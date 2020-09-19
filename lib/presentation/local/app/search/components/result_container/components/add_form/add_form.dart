@@ -95,6 +95,11 @@ class _AddBookFormState extends State<AddBookForm> {
                 linkToNetworkLargeCover: linkToNetworkLargeCover,
                 linkToNetworkThumbnailCover:
                     resultFromAPI.linkToNetworkThumbnailCover,
+                currentImage: {
+                  'linkPath': linkToNetworkLargeCover ??
+                      resultFromAPI.linkToNetworkThumbnailCover,
+                  'network': true,
+                },
                 // these values will be added during usage of the App
                 pathToLocalLargeCover: null,
                 pathToLocalThumbnailCover: null,
