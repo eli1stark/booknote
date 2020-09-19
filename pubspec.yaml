@@ -64,4 +64,7 @@ flutter:
     - family: Lato
       fonts:
         - asset: fonts/Lato-Regular.ttf
+    - family: Itim
+      fonts:
+        - asset: fonts/Itim-Regular.ttf
 

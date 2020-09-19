@@ -6,6 +6,10 @@ import 'nav_item.dart';
 import 'nav_title.dart';
 
 class NavigationMenu extends StatelessWidget {
+  NavigationMenu(this.uid);
+
+  final String uid;
+
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -20,7 +24,11 @@ class NavigationMenu extends StatelessWidget {
           onTap: () {
             // close the Menu and go to the Categories
             Navigator.pop(context);
-            Navigator.pushNamed(context, Categories.routeName);
+            Navigator.pushNamed(
+              context,
+              Categories.routeName,
+              arguments: CategoriesArgument(uid),
+            );
           },
         ),
         MenuItem(

@@ -1,15 +1,23 @@
-import 'package:booknote/infrastructure/database/database.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import '../styles.dart';
 import 'delete_button.dart';
 import 'edit_form.dart';
+import 'helpers.dart';
 
-void showSettingsPanel(context, item, categories, uid) {
+void showSettingsPanel(
+  BuildContext context,
+  Map item,
+  List categories,
+  List<DocumentSnapshot> books,
+  String uid,
+) {
   showModalBottomSheet(
     context: context,
     backgroundColor: Colors.transparent,
     isScrollControlled: true,
-    builder: (context) {
-      // 'SingleChildScrollView' widget to make bottom sheet expand according to content
+    builder: (BuildContext context) {
+      // 'SingleChildScrollView' to make bottom sheet expand according to content
       return SingleChildScrollView(
         // Container and padding to make sheet move along with keyboard
         child: Container(
@@ -17,36 +25,24 @@ void showSettingsPanel(context, item, categories, uid) {
             bottom: MediaQuery.of(context).viewInsets.bottom,
           ),
           // Ciricular border
-          decoration: BoxDecoration(
-            color: Colors.grey[200],
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(20.0),
-              topRight: Radius.circular(20.0),
-            ),
-          ),
-          // make padding inside Sheet
+          decoration: editSheetDecoration,
           child: Stack(
             children: [
-              DeleteButton(
-                onTap: () {
-                  // remove category from the List of categories
-                  categories.removeAt(item['indexKey']);
-
-                  // update keys according to index of every map
-                  for (int i = 0; i < categories.length; i++) {
-                    categories[i]['indexKey'] = i;
-                  }
-
-                  // update Firestore
-                  DatabaseService(uid: uid).updateCategories(categories);
-                  Navigator.pop(context);
-                },
+              Positioned(
+                bottom: 0,
+                right: 0,
+                child: DeleteButton(
+                  onTap: () => deleteCategory(
+                    context: context,
+                    item: item,
+                    uid: uid,
+                    categories: categories,
+                    books: books,
+                  ),
+                ),
               ),
               Container(
-                padding: EdgeInsets.symmetric(
-                  vertical: 20.0,
-                  horizontal: 60.0,
-                ),
+                padding: editFormPadding,
                 child: EditForm(
                   item: item,
                   categories: categories,

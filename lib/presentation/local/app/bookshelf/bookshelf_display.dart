@@ -24,7 +24,7 @@ class BookshelfDisplay extends StatelessWidget {
       List categories = Provider.of<CategoriesData>(context).categories;
 
       // get books from the Firestore
-      dynamic books = Provider.of<QuerySnapshot>(context);
+      QuerySnapshot books = Provider.of<QuerySnapshot>(context);
 
       print(books);
 
@@ -36,7 +36,7 @@ class BookshelfDisplay extends StatelessWidget {
           appBar: bookshelfAppBar(context, categories, uid),
           drawer: Drawer(
             child: SafeArea(
-              child: NavigationMenu(),
+              child: NavigationMenu(uid),
             ),
           ),
           body: Column(
