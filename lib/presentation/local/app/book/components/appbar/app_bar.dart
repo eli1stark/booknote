@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../../bookshelf/bookshelf.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +7,10 @@ import 'components/on_selected.dart';
 import 'components/menu_icon.dart';
 
 class BookAppBar extends StatelessWidget {
+  BookAppBar(this.book);
+
+  final DocumentSnapshot book;
+
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -18,7 +23,10 @@ class BookAppBar extends StatelessWidget {
           color: Colors.black,
           size: 35.0,
         ),
-        onPressed: () => Navigator.pushNamed(context, Bookshelf.routeName),
+        onPressed: () => Navigator.pushNamed(
+          context,
+          Bookshelf.routeName,
+        ),
       ),
       actions: <Widget>[
         PopupMenuButton<String>(
@@ -58,7 +66,11 @@ class BookAppBar extends StatelessWidget {
               );
             }).toList();
           },
-          onSelected: (action) => onSelected(action, context),
+          onSelected: (action) => onSelected(
+            action,
+            context,
+            book,
+          ),
         ),
       ],
     );

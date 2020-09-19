@@ -4,5 +4,10 @@ class MenuActions {
   static const String move = 'Move';
   static const String delete = 'Delete';
 
-  static const List<String> menuActions = [cover, about, move, delete];
+  static const List<String> menuActions = [
+    cover,
+    about,
+    move,
+    delete,
+  ];
 }

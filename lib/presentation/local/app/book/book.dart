@@ -29,7 +29,7 @@ class _BookState extends State<Book> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: PreferredSize(
-        child: BookAppBar(),
+        child: BookAppBar(arg.book),
         preferredSize: Size.fromHeight(kToolbarHeight),
       ),
       body: Stack(

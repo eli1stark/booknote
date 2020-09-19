@@ -25,10 +25,9 @@ class BookBox extends StatelessWidget {
             flex: 3,
             child: BookBoxButton(
               icon: FontAwesomeIcons.thumbtack,
-              // TODO add book tracker functionality
               onTap: () => showDialog(
                 context: context,
-                builder: (_) => bookTrackerDialog(_),
+                builder: (context) => bookTrackerDialog(context),
               ),
             ),
           ),
@@ -42,8 +41,10 @@ class BookBox extends StatelessWidget {
             flex: 3,
             child: BookBoxButton(
               icon: FontAwesomeIcons.pencilAlt,
-              // TODO add note editor functionality
-              onTap: () => Navigator.pushNamed(context, BookEditor.routeName),
+              onTap: () => Navigator.pushNamed(
+                context,
+                BookEditor.routeName,
+              ),
             ),
           ),
         ],

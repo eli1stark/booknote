@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'constants.dart';
 import '../../book_menu/book_cover/book_cover.dart';
@@ -9,23 +10,27 @@ import '../../book_menu/book_move/book_move.dart';
 void onSelected(
   String action,
   BuildContext context,
+  DocumentSnapshot book,
 ) {
   if (action == MenuActions.cover) {
-    Navigator.pushNamed(context, BookCover.routeName);
+    Navigator.pushNamed(
+      context,
+      BookCover.routeName,
+    );
   } else if (action == MenuActions.about) {
     showDialog(
       context: context,
-      builder: (_) => aboutBookDialog(_),
+      builder: (context) => aboutBookDialog(context, book),
     );
   } else if (action == MenuActions.move) {
     showDialog(
       context: context,
-      builder: (_) => moveBookDialog(_),
+      builder: (context) => moveBookDialog(context),
     );
   } else if (action == MenuActions.delete) {
     showDialog(
       context: context,
-      builder: (_) => deleteBookDialog(_),
+      builder: (context) => deleteBookDialog(context),
     );
   }
 }

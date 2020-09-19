@@ -1,37 +1,41 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'components/about_close.dart';
-import 'components/about_row.dart';
+import 'components/about_text.dart';
 import '../components/content_container.dart';
 
-Dialog aboutBookDialog(BuildContext context) {
+Dialog aboutBookDialog(
+  BuildContext context,
+  DocumentSnapshot book,
+) {
   return BookMenuContentContainer(
     child: Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        BookAboutRow(
+        AboutRichText(
           title: 'Title:',
-          about: '"Hello Dad"',
+          about: book['title'],
         ),
-        BookAboutRow(
+        AboutRichText(
           title: 'Authors:',
-          about: 'Karen Bali',
+          about: book['authors'],
         ),
-        BookAboutRow(
+        AboutRichText(
           title: 'Publisher:',
-          about: 'WritersPrintShop',
+          about: book['publisher'],
         ),
-        BookAboutRow(
+        AboutRichText(
           title: 'Categories:',
-          about: 'Father and child',
+          about: book['categoryType'],
         ),
-        BookAboutRow(
+        AboutRichText(
           title: 'Published:',
-          about: '2004',
+          about: book['published'],
         ),
-        BookAboutRow(
+        AboutRichText(
           title: 'Pages:',
-          about: '59',
+          about: book['pages'].toString(),
         ),
         BookAboutClose()
       ],
