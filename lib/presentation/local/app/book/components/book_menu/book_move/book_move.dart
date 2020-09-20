@@ -1,5 +1,4 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'components/move_buttons.dart';
@@ -9,13 +8,13 @@ import 'components/move_title.dart';
 
 class BookMove extends StatefulWidget {
   BookMove({
-    @required this.book,
+    @required this.documentID,
     @required this.currentCategory,
     @required this.categories,
     @required this.uid,
   });
 
-  final DocumentSnapshot book;
+  final String documentID;
   final Map currentCategory;
   final List categories;
   final String uid;
@@ -75,7 +74,7 @@ class _BookMoveState extends State<BookMove> {
         ),
         BookMoveSpacer20px(),
         BookMoveButtons(
-          book: widget.book,
+          documentID: widget.documentID,
           chosenCategoryIndex: chosenCategoryIndex,
           newCategories: newCategories,
           uid: widget.uid,

@@ -1,17 +1,16 @@
 import 'package:booknote/infrastructure/database/database.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../../../../bookshelf/bookshelf.dart';
 import 'package:flutter/material.dart';
 
 class BookMoveButtons extends StatelessWidget {
   BookMoveButtons({
-    @required this.book,
+    @required this.documentID,
     @required this.chosenCategoryIndex,
     @required this.newCategories,
     @required this.uid,
   });
 
-  final DocumentSnapshot book;
+  final String documentID;
   final int chosenCategoryIndex;
   final List newCategories;
   final String uid;
@@ -55,7 +54,7 @@ class BookMoveButtons extends StatelessWidget {
           ),
           onPressed: () {
             DatabaseService(uid: uid).updateBookCategoryID(
-              book.documentID,
+              documentID,
               newCategories[chosenCategoryIndex]['id'],
             );
 

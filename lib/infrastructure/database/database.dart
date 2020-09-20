@@ -122,4 +122,9 @@ class DatabaseService {
       'categoryID': categoryID,
     });
   }
+
+  /// [BOOK] Delete Book(document) from the collection
+  void deleteBook(String documentID) {
+    users.document(uid).collection('books').document(documentID).delete();
+  }
 }

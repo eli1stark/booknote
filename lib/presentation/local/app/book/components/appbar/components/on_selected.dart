@@ -29,7 +29,7 @@ void onSelected({
     showDialog(
       context: context,
       builder: (_) => moveBookDialog(
-        book: book,
+        documentID: book.documentID,
         currentCategory: currentCategory,
         categories: categories,
         uid: uid,
@@ -38,7 +38,11 @@ void onSelected({
   } else if (action == MenuActions.delete) {
     showDialog(
       context: context,
-      builder: (_) => deleteBookDialog(context),
+      builder: (_) => deleteBookDialog(
+        context: context,
+        uid: uid,
+        documentID: book.documentID,
+      ),
     );
   }
 }

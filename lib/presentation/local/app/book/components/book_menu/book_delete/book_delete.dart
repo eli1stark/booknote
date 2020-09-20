@@ -1,8 +1,13 @@
+import 'package:booknote/infrastructure/database/database.dart';
 import '../../../../bookshelf/bookshelf.dart';
 import 'package:flutter/material.dart';
 import 'components/delete_button.dart';
 
-AlertDialog deleteBookDialog(BuildContext context) {
+AlertDialog deleteBookDialog({
+  BuildContext context,
+  String uid,
+  String documentID,
+}) {
   return AlertDialog(
     title: Text(
       'Delete',
@@ -11,7 +16,7 @@ AlertDialog deleteBookDialog(BuildContext context) {
       ),
     ),
     content: Text(
-      'This book will be removed!',
+      'This book will be deleted!',
       style: TextStyle(
         fontSize: 17.0,
       ),
@@ -24,7 +29,8 @@ AlertDialog deleteBookDialog(BuildContext context) {
       DeleteBookButton(
         text: 'DELETE',
         onPressed: () {
-          // TODO delete the book from Firestore
+          DatabaseService(uid: uid).deleteBook(documentID);
+
           Navigator.pushNamed(context, Bookshelf.routeName);
         },
       ),
