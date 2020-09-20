@@ -100,4 +100,16 @@ class DatabaseService {
       'pathToNote': pathToNote,
     });
   }
+
+  /// [BOOK] will update 'pages' and 'pagesRead' values
+  void updateBookPages(
+    String documentID,
+    int pages,
+    int pagesRead,
+  ) {
+    users.document(uid).collection('books').document(documentID).updateData({
+      'pages': pages,
+      'pagesRead': pagesRead,
+    });
+  }
 }

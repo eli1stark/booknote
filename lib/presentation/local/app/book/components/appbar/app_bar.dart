@@ -7,9 +7,13 @@ import 'components/on_selected.dart';
 import 'components/menu_icon.dart';
 
 class BookAppBar extends StatelessWidget {
-  BookAppBar(this.book);
+  BookAppBar(
+    this.book,
+    this.uid,
+  );
 
   final DocumentSnapshot book;
+  final String uid;
 
   @override
   Widget build(BuildContext context) {

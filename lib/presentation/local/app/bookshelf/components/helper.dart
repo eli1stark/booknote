@@ -11,6 +11,7 @@ import 'image_frame.dart';
 Widget processBooks(
   List<DocumentSnapshot> books,
   Map category,
+  String uid,
 ) {
   List<ImageFrame> sortedBooks = [];
 
@@ -21,6 +22,7 @@ Widget processBooks(
           linkPath: book['currentImage']['linkPath'],
           network: book['currentImage']['network'],
           book: book,
+          uid: uid,
         ),
       );
     }

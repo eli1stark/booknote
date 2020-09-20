@@ -4,14 +4,16 @@ import '../../book/book.dart';
 
 class ImageFrame extends StatelessWidget {
   ImageFrame({
-    this.linkPath,
-    this.network,
-    this.book,
+    @required this.linkPath,
+    @required this.network,
+    @required this.book,
+    @required this.uid,
   });
 
   final String linkPath;
   final bool network;
   final DocumentSnapshot book;
+  final String uid;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +25,10 @@ class ImageFrame extends StatelessWidget {
         Navigator.pushNamed(
           context,
           Book.routeName,
-          arguments: BookArgument(book),
+          arguments: BookArgument(
+            book: book,
+            uid: uid,
+          ),
         );
       },
       child: SizedBox.expand(
