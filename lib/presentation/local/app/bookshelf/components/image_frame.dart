@@ -8,12 +8,16 @@ class ImageFrame extends StatelessWidget {
     @required this.network,
     @required this.book,
     @required this.uid,
+    @required this.currentCategory,
+    @required this.categories,
   });
 
   final String linkPath;
   final bool network;
   final DocumentSnapshot book;
   final String uid;
+  final Map currentCategory;
+  final List categories;
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +32,8 @@ class ImageFrame extends StatelessWidget {
           arguments: BookArgument(
             book: book,
             uid: uid,
+            currentCategory: currentCategory,
+            categories: categories,
           ),
         );
       },

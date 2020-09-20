@@ -112,4 +112,14 @@ class DatabaseService {
       'pagesRead': pagesRead,
     });
   }
+
+  /// [BOOK] will update category of the Book
+  void updateBookCategoryID(
+    String documentID,
+    int categoryID,
+  ) {
+    users.document(uid).collection('books').document(documentID).updateData({
+      'categoryID': categoryID,
+    });
+  }
 }

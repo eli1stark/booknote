@@ -5,7 +5,6 @@ import 'components/about_text.dart';
 import '../components/content_container.dart';
 
 Dialog aboutBookDialog(
-  BuildContext context,
   DocumentSnapshot book,
 ) {
   return BookMenuContentContainer(
@@ -33,6 +32,8 @@ Dialog aboutBookDialog(
           title: 'Published:',
           about: book['published'],
         ),
+        // TODO make pages reflect on changes in BookTracker
+        // I just need to pass state of the Cubit there
         AboutRichText(
           title: 'Pages:',
           about: book['pages'].toString(),

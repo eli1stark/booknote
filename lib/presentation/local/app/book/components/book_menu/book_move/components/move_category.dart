@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
 class BookMoveCategory extends StatelessWidget {
-  const BookMoveCategory(this.text);
+  const BookMoveCategory(
+    this.currentCategory,
+  );
 
-  final String text;
+  final Map currentCategory;
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +13,7 @@ class BookMoveCategory extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
 
     return Text(
-      text,
+      currentCategory['emoji'] + currentCategory['title'],
       style: TextStyle(
         fontSize: size.width * 0.0487,
       ),

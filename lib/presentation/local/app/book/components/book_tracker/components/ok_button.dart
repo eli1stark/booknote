@@ -8,6 +8,9 @@ class TrackerOkButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FlatButton(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10.0),
+      ),
       highlightColor: Colors.transparent,
       splashColor: Colors.grey[200],
       child: Text(

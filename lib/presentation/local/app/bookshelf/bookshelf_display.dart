@@ -52,8 +52,13 @@ class BookshelfDisplay extends StatelessWidget {
               Expanded(
                 child: TabBarView(
                   children: [
-                    for (Map category in categories)
-                      processBooks(books, category, uid)
+                    for (Map currentCategory in categories)
+                      processBooks(
+                        uid: uid,
+                        books: books,
+                        currentCategory: currentCategory,
+                        categories: categories,
+                      )
                   ],
                 ),
               ),

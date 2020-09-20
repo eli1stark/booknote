@@ -8,21 +8,24 @@ import 'image_frame.dart';
 /// Return List<ImageFrame>. \
 /// IF there aren't any book in the current category: \
 /// Return AlterInfo.
-Widget processBooks(
-  List<DocumentSnapshot> books,
-  Map category,
+Widget processBooks({
   String uid,
-) {
+  Map currentCategory,
+  List categories,
+  List<DocumentSnapshot> books,
+}) {
   List<ImageFrame> sortedBooks = [];
 
   for (DocumentSnapshot book in books) {
-    if (category['id'] == book['categoryID']) {
+    if (currentCategory['id'] == book['categoryID']) {
       sortedBooks.add(
         ImageFrame(
           linkPath: book['currentImage']['linkPath'],
           network: book['currentImage']['network'],
           book: book,
           uid: uid,
+          currentCategory: currentCategory,
+          categories: categories,
         ),
       );
     }

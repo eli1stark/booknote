@@ -4,14 +4,17 @@ import 'constants.dart';
 import '../../book_menu/book_cover/book_cover.dart';
 import '../../book_menu/book_about/book_about.dart';
 import '../../book_menu/book_delete/book_delete.dart';
-import '../../book_menu/book_move/book_move.dart';
+import '../../book_menu/book_move/components/move_dialog.dart';
 
 /// Takes MenuAction in BookPage and perform some action
-void onSelected(
+void onSelected({
   String action,
   BuildContext context,
   DocumentSnapshot book,
-) {
+  Map currentCategory,
+  List categories,
+  String uid,
+}) {
   if (action == MenuActions.cover) {
     Navigator.pushNamed(
       context,
@@ -20,17 +23,22 @@ void onSelected(
   } else if (action == MenuActions.about) {
     showDialog(
       context: context,
-      builder: (context) => aboutBookDialog(context, book),
+      builder: (_) => aboutBookDialog(book),
     );
   } else if (action == MenuActions.move) {
     showDialog(
       context: context,
-      builder: (context) => moveBookDialog(context),
+      builder: (_) => moveBookDialog(
+        book: book,
+        currentCategory: currentCategory,
+        categories: categories,
+        uid: uid,
+      ),
     );
   } else if (action == MenuActions.delete) {
     showDialog(
       context: context,
-      builder: (context) => deleteBookDialog(context),
+      builder: (_) => deleteBookDialog(context),
     );
   }
 }

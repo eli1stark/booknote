@@ -10,10 +10,14 @@ class BookArgument {
   BookArgument({
     @required this.book,
     @required this.uid,
+    @required this.currentCategory,
+    @required this.categories,
   });
 
   final DocumentSnapshot book;
   final String uid;
+  final Map currentCategory;
+  final List categories;
 }
 
 class Book extends StatefulWidget {
@@ -40,7 +44,12 @@ class _BookState extends State<Book> {
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: PreferredSize(
-          child: BookAppBar(arg.book, arg.uid),
+          child: BookAppBar(
+            book: arg.book,
+            uid: arg.uid,
+            categories: arg.categories,
+            currentCategory: arg.currentCategory,
+          ),
           preferredSize: Size.fromHeight(kToolbarHeight),
         ),
         body: Stack(

@@ -42,6 +42,7 @@ class BookBox extends StatelessWidget {
               book['currentImage'],
             ),
           ),
+          // TODO connect BookEditor to the database
           Expanded(
             flex: 3,
             child: BookBoxButton(

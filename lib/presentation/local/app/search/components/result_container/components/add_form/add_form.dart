@@ -100,11 +100,11 @@ class _AddBookFormState extends State<AddBookForm> {
                       resultFromAPI.linkToNetworkThumbnailCover,
                   'network': true,
                 },
+                pagesRead: 0,
                 // these values will be added during usage of the App
                 pathToLocalLargeCover: null,
                 pathToLocalThumbnailCover: null,
                 pathToLocalCustomCover: null,
-                pagesRead: null,
                 pathToNote: null,
               );
 

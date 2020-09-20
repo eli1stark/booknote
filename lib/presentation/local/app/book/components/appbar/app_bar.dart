@@ -7,13 +7,17 @@ import 'components/on_selected.dart';
 import 'components/menu_icon.dart';
 
 class BookAppBar extends StatelessWidget {
-  BookAppBar(
-    this.book,
-    this.uid,
-  );
+  BookAppBar({
+    @required this.book,
+    @required this.uid,
+    @required this.currentCategory,
+    @required this.categories,
+  });
 
   final DocumentSnapshot book;
   final String uid;
+  final Map currentCategory;
+  final List categories;
 
   @override
   Widget build(BuildContext context) {
@@ -71,9 +75,12 @@ class BookAppBar extends StatelessWidget {
             }).toList();
           },
           onSelected: (action) => onSelected(
-            action,
-            context,
-            book,
+            action: action,
+            context: context,
+            book: book,
+            currentCategory: currentCategory,
+            categories: categories,
+            uid: uid,
           ),
         ),
       ],
