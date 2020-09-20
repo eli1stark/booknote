@@ -29,6 +29,7 @@ WillPopScope bookTrackerDialog(
       return Future.value(true);
     },
     child: Dialog(
+      backgroundColor: Colors.white,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(25.0),
       ),

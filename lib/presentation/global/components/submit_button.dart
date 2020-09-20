@@ -1,17 +1,24 @@
 import 'package:flutter/material.dart';
 
-class CategoryButton extends StatelessWidget {
-  CategoryButton({
+const Color grey200 = Color(0xFFEEEEEE);
+
+class SubmitButton extends StatelessWidget {
+  const SubmitButton({
+    Key key,
     @required this.text,
     @required this.onPressed,
-    this.color = Colors.black,
-    this.size = 20.0,
-  });
+    this.color = Colors.grey,
+    this.splashColor = grey200,
+    this.size = 17.0,
+    this.fontWeight = FontWeight.normal,
+  }) : super(key: key);
 
   final String text;
   final Function onPressed;
-  final Color color;
   final double size;
+  final Color color;
+  final Color splashColor;
+  final FontWeight fontWeight;
 
   @override
   Widget build(BuildContext context) {
@@ -20,12 +27,13 @@ class CategoryButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(10.0),
       ),
       highlightColor: Colors.transparent,
-      splashColor: Colors.grey[300],
+      splashColor: splashColor,
       child: Text(
         text,
         style: TextStyle(
-          color: color,
           fontSize: size,
+          color: color,
+          fontWeight: fontWeight,
         ),
       ),
       onPressed: onPressed,

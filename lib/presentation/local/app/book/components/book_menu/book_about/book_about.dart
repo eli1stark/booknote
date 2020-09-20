@@ -38,7 +38,7 @@ Dialog aboutBookDialog(
           title: 'Pages:',
           about: book['pages'].toString(),
         ),
-        BookAboutClose()
+        BookAboutClose(),
       ],
     ),
   );

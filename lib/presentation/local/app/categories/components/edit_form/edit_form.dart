@@ -1,6 +1,6 @@
 import 'package:booknote/infrastructure/database/database.dart';
+import 'package:booknote/presentation/global/components/submit_button.dart';
 import 'package:flutter/material.dart';
-import '../category_button.dart';
 import '../styles.dart';
 import 'helpers.dart';
 
@@ -42,8 +42,11 @@ class _EditFormState extends State<EditForm> {
             onChanged: (value) => newItemTitle = value,
           ),
           SizedBox(height: 20.0),
-          CategoryButton(
+          SubmitButton(
             text: 'UPDATE',
+            color: Colors.black,
+            size: 20.0,
+            splashColor: Colors.grey[300],
             onPressed: () async {
               if (_formKey.currentState.validate()) {
                 // update Categories(List of Maps)

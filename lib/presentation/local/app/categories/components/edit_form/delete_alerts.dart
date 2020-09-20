@@ -1,7 +1,7 @@
 import 'package:booknote/infrastructure/database/database.dart';
+import 'package:booknote/presentation/global/components/submit_button.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '../category_button.dart';
 
 String oneLeftText = 'You can\'t delete the last remaining category!';
 String isNotEmptyText =
@@ -47,9 +47,9 @@ Dialog deleteCategoryAlertError(BuildContext context, String text) {
           SizedBox(
             height: 10.0,
           ),
-          CategoryButton(
+          SubmitButton(
             text: 'CLOSE',
-            color: Colors.grey[500],
+            size: 20.0,
             onPressed: () => Navigator.pop(context),
           )
         ],
@@ -95,15 +95,13 @@ deleteCategoryAlertSuccess({
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              CategoryButton(
+              SubmitButton(
                 text: 'NO',
-                size: 17.0,
                 color: Colors.grey[500],
                 onPressed: () => Navigator.pop(context),
               ),
-              CategoryButton(
+              SubmitButton(
                 text: 'YES',
-                size: 17.0,
                 color: Colors.grey[500],
                 onPressed: () {
                   // remove category from the List of categories

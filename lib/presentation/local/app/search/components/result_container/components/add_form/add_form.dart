@@ -3,11 +3,11 @@ import 'package:booknote/domain/search/result_from_api.dart';
 import 'package:booknote/infrastructure/api/methods_api.dart';
 import 'package:booknote/infrastructure/database/database.dart';
 import 'package:booknote/presentation/global/components/loader.dart';
+import 'package:booknote/presentation/global/components/submit_button.dart';
 import 'package:booknote/presentation/local/app/bookshelf/bookshelf.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../../helpers.dart';
-import '../add_button.dart';
 
 class AddBookForm extends StatefulWidget {
   AddBookForm({
@@ -68,7 +68,9 @@ class _AddBookFormState extends State<AddBookForm> {
             ),
           ),
           SizedBox(height: 10.0),
-          AddBookButton(
+          SubmitButton(
+            text: 'ADD',
+            fontWeight: FontWeight.bold,
             onPressed: () async {
               setState(() => isLoading = true);
 

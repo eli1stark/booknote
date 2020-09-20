@@ -1,9 +1,9 @@
 import 'package:booknote/infrastructure/database/database.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../../../../../global/components/submit_button.dart';
 import '../../../emoji_picker/emoji_picker.dart';
 import 'package:flutter/material.dart';
 import '../styles.dart';
-import '../category_button.dart';
 import 'helper.dart';
 
 class AddForm extends StatefulWidget {
@@ -86,8 +86,11 @@ class _AddFormState extends State<AddForm> {
             onChanged: (value) => _item['title'] = value,
           ),
           SizedBox(height: 20.0),
-          CategoryButton(
+          SubmitButton(
             text: 'ADD',
+            color: Colors.black,
+            size: 20.0,
+            splashColor: Colors.grey[300],
             onPressed: () async {
               if (_formKey.currentState.validate()) {
                 // update index of the item

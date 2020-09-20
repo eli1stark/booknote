@@ -31,5 +31,3 @@ showAddPopOut({
     },
   );
 }
-
-// TODO refactor to general components because 'categories' also has the same functionality

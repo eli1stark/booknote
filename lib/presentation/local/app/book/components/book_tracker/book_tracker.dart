@@ -1,11 +1,11 @@
 import 'package:booknote/application/book/tracker_state_cubit.dart';
 import 'package:booknote/domain/book/tracker_state.dart';
 import 'package:booknote/infrastructure/database/database.dart';
+import 'package:booknote/presentation/global/components/submit_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'components/ok_button.dart';
 import 'components/ticker_text.dart';
 
 // 2 issues with CupertinoPicker:
@@ -76,7 +76,8 @@ class BookTracker extends StatelessWidget {
                   ],
                 ),
               ),
-              TrackerOkButton(
+              SubmitButton(
+                text: 'OK',
                 onPressed: () {
                   if (trackerState.pages < trackerState.pagesRead) {
                     trackerCubit.updateBothValues(trackerState.pages);

@@ -12,6 +12,7 @@ class BookMenuContentContainer extends Dialog {
     Size size = MediaQuery.of(context).size;
 
     return Dialog(
+      backgroundColor: Colors.white,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(25.0),
       ),

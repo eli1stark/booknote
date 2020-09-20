@@ -1,6 +1,6 @@
 import 'package:booknote/domain/search/result_from_api.dart';
+import '../../../../../global/components/submit_button.dart';
 import 'package:flutter/material.dart';
-import 'components/add_button.dart';
 import 'components/add_form/pop_out.dart';
 import 'components/common_text.dart';
 import 'components/spacers.dart';
@@ -86,7 +86,9 @@ class SearchResultContainer extends StatelessWidget {
                   Positioned(
                     right: 0,
                     bottom: 0,
-                    child: AddBookButton(
+                    child: SubmitButton(
+                      text: 'ADD',
+                      fontWeight: FontWeight.bold,
                       onPressed: () => showAddPopOut(
                         context: context,
                         categories: categories,

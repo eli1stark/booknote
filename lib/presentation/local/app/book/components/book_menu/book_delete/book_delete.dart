@@ -1,7 +1,7 @@
 import 'package:booknote/infrastructure/database/database.dart';
+import 'package:booknote/presentation/global/components/submit_button.dart';
 import '../../../../bookshelf/bookshelf.dart';
 import 'package:flutter/material.dart';
-import 'components/delete_button.dart';
 
 AlertDialog deleteBookDialog({
   BuildContext context,
@@ -22,11 +22,11 @@ AlertDialog deleteBookDialog({
       ),
     ),
     actions: [
-      DeleteBookButton(
+      SubmitButton(
         text: 'CANCEL',
         onPressed: () => Navigator.pop(context),
       ),
-      DeleteBookButton(
+      SubmitButton(
         text: 'DELETE',
         onPressed: () {
           DatabaseService(uid: uid).deleteBook(documentID);

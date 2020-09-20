@@ -1,3 +1,4 @@
+import 'package:booknote/presentation/global/components/submit_button.dart';
 import 'package:flutter/material.dart';
 
 class BookAboutClose extends StatelessWidget {
@@ -5,16 +6,9 @@ class BookAboutClose extends StatelessWidget {
   Widget build(BuildContext context) {
     return Align(
       alignment: Alignment.bottomRight,
-      child: FlatButton(
-        highlightColor: Colors.transparent,
-        splashColor: Colors.grey[200],
-        child: Text(
-          'CLOSE',
-          style: TextStyle(
-            fontSize: 18.0,
-            color: Colors.grey,
-          ),
-        ),
+      child: SubmitButton(
+        text: 'CLOSE',
+        size: 18.0,
         onPressed: () => Navigator.pop(context),
       ),
     );
