@@ -3,9 +3,13 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class BookFrame extends StatelessWidget {
-  const BookFrame(this.currentImage);
+  const BookFrame({
+    this.linkPath,
+    this.network,
+  });
 
-  final Map currentImage;
+  final String linkPath;
+  final bool network;
 
   @override
   Widget build(BuildContext context) {
@@ -25,14 +29,14 @@ class BookFrame extends StatelessWidget {
         // and show its round corners
         semanticContainer: true,
         clipBehavior: Clip.antiAliasWithSaveLayer,
-        child: currentImage['network']
+        child: network
             ? CachedNetworkImage(
-                imageUrl: currentImage['linkPath'],
+                imageUrl: linkPath,
                 height: size.height * 0.35,
                 fit: BoxFit.fill,
               )
             : Image.file(
-                File(currentImage['linkPath']),
+                File(linkPath),
                 height: size.height * 0.35,
                 fit: BoxFit.fill,
               ),

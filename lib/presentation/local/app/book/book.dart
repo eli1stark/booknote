@@ -1,3 +1,4 @@
+import 'package:booknote/application/book/cover_state_cubit.dart';
 import 'package:booknote/application/book/tracker_state_cubit.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -36,11 +37,22 @@ class _BookState extends State<Book> {
     // Get Argument(path) from Bookshelf page
     BookArgument arg = ModalRoute.of(context).settings.arguments;
 
-    return BlocProvider<BookTrackerCubit>(
-      create: (BuildContext context) => BookTrackerCubit(
-        arg.book['pages'],
-        arg.book['pagesRead'],
-      ),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<CoverStateCubit>(
+          create: (BuildContext context) => CoverStateCubit(
+            customImage: arg.book['pathToLocalCustomCover'],
+            selectedImage: arg.book['currentImage']['linkPath'],
+            network:  arg.book['currentImage']['network'],
+          ),
+        ),
+        BlocProvider<BookTrackerCubit>(
+          create: (BuildContext context) => BookTrackerCubit(
+            arg.book['pages'],
+            arg.book['pagesRead'],
+          ),
+        ),
+      ],
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: PreferredSize(

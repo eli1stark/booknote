@@ -20,6 +20,7 @@ void onSelected({
       context,
       BookCover.routeName,
       arguments: BookCoverArgument(
+        bookContext: context,
         book: book,
         uid: uid,
       ),
