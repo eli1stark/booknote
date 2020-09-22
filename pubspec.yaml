@@ -30,6 +30,9 @@ dependencies:
   image_picker: ^0.6.7+7
   # Zefyr (Note Editor)
   zefyr: ^0.11.0
+  # cashing network images
+  cached_network_image: ^2.3.2+1
+
 
   # State Management
   # provider:

@@ -1,3 +1,5 @@
+import 'dart:io';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class BookFrame extends StatelessWidget {
@@ -24,13 +26,13 @@ class BookFrame extends StatelessWidget {
         semanticContainer: true,
         clipBehavior: Clip.antiAliasWithSaveLayer,
         child: currentImage['network']
-            ? Image.network(
-                currentImage['linkPath'],
+            ? CachedNetworkImage(
+                imageUrl: currentImage['linkPath'],
                 height: size.height * 0.35,
                 fit: BoxFit.fill,
               )
-            : Image.asset(
-                currentImage['linkPath'],
+            : Image.file(
+                File(currentImage['linkPath']),
                 height: size.height * 0.35,
                 fit: BoxFit.fill,
               ),

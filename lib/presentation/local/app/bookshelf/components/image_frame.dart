@@ -1,3 +1,5 @@
+import 'dart:io';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import '../../book/book.dart';
@@ -50,12 +52,13 @@ class ImageFrame extends StatelessWidget {
           semanticContainer: true,
           clipBehavior: Clip.antiAliasWithSaveLayer,
           child: network
-              ? Image.network(
-                  linkPath,
+              ? CachedNetworkImage(
+                  imageUrl: linkPath,
                   fit: BoxFit.fill,
+                  fadeInCurve: Curves.easeIn,
                 )
-              : Image.asset(
-                  linkPath,
+              : Image.file(
+                  File(linkPath),
                   fit: BoxFit.fill,
                 ),
         ),

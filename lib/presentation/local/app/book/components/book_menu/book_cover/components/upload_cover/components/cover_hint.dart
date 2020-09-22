@@ -19,6 +19,7 @@ class BookCoverHint extends StatelessWidget {
         text,
         style: TextStyle(
           fontSize: size.width * 0.049,
+          color: Colors.grey[600],
         ),
       ),
     );

@@ -19,6 +19,10 @@ void onSelected({
     Navigator.pushNamed(
       context,
       BookCover.routeName,
+      arguments: BookCoverArgument(
+        book: book,
+        uid: uid,
+      ),
     );
   } else if (action == MenuActions.about) {
     showDialog(

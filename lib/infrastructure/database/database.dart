@@ -74,8 +74,6 @@ class DatabaseService {
     @required int pages,
     @required String linkToNetworkLargeCover,
     @required String linkToNetworkThumbnailCover,
-    @required String pathToLocalLargeCover,
-    @required String pathToLocalThumbnailCover,
     @required String pathToLocalCustomCover,
     @required Map currentImage,
     @required int pagesRead,
@@ -92,8 +90,6 @@ class DatabaseService {
       'pages': pages,
       'linkToNetworkLargeCover': linkToNetworkLargeCover,
       'linkToNetworkThumbnailCover': linkToNetworkThumbnailCover,
-      'pathToLocalLargeCover': pathToLocalLargeCover,
-      'pathToLocalThumbnailCover': pathToLocalThumbnailCover,
       'pathToLocalCustomCover': pathToLocalCustomCover,
       'currentImage': currentImage,
       'pagesRead': pagesRead,
@@ -126,5 +122,34 @@ class DatabaseService {
   /// [BOOK] Delete Book(document) from the collection
   void deleteBook(String documentID) {
     users.document(uid).collection('books').document(documentID).delete();
+  }
+
+  /// [BOOK] [COVER] Update Current Image
+  void updateCurrentImage(
+    String linkPath,
+    bool network,
+    String documentID,
+  ) {
+    users.document(uid).collection('books').document(documentID).updateData({
+      'currentImage': {
+        'linkPath': linkPath,
+        'network': network,
+      },
+    });
+  }
+
+  /// [BOOK] [COVER] Update Custom Image
+  /// and automatically select uploaded image
+  void updateCustomImage(
+    String linkPath,
+    String documentID,
+  ) {
+    users.document(uid).collection('books').document(documentID).updateData({
+      'pathToLocalCustomCover': linkPath,
+      'currentImage': {
+        'linkPath': linkPath,
+        'network': false,
+      },
+    });
   }
 }
