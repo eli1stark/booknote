@@ -27,7 +27,7 @@ class BookCover extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // get arguments from Menu
+    // get arguments from the Menu
     BookCoverArgument arg = ModalRoute.of(context).settings.arguments;
 
     return Builder(

@@ -48,7 +48,6 @@ class BookBox extends StatelessWidget {
                 network: coverState.network,
               ),
             ),
-            // TODO connect BookEditor to the database
             Expanded(
               flex: 3,
               child: BookBoxButton(
@@ -56,6 +55,7 @@ class BookBox extends StatelessWidget {
                 onTap: () => Navigator.pushNamed(
                   context,
                   BookEditor.routeName,
+                  arguments: BookEditorArgument(book),
                 ),
               ),
             ),

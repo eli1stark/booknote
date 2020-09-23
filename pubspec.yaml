@@ -32,6 +32,8 @@ dependencies:
   zefyr: ^0.11.0
   # cashing network images
   cached_network_image: ^2.3.2+1
+  # accessing device paths
+  path_provider: ^1.6.18
 
 
   # State Management
