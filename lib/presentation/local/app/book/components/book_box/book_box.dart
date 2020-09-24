@@ -55,7 +55,10 @@ class BookBox extends StatelessWidget {
                 onTap: () => Navigator.pushNamed(
                   context,
                   BookEditor.routeName,
-                  arguments: BookEditorArgument(book),
+                  arguments: BookEditorArgument(
+                    book,
+                    context,
+                  ),
                 ),
               ),
             ),

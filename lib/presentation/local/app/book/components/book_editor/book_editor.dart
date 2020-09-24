@@ -1,14 +1,20 @@
+import 'package:booknote/application/book/note_state_cubit.dart';
 import 'package:booknote/presentation/global/components/loader.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zefyr/zefyr.dart';
 import 'components/appbar.dart';
 import 'components/helpers.dart';
 
 class BookEditorArgument {
-  BookEditorArgument(this.book);
+  BookEditorArgument(
+    this.book,
+    this.bookContext,
+  );
 
   final DocumentSnapshot book;
+  final BuildContext bookContext;
 }
 
 class BookEditor extends StatefulWidget {
@@ -28,6 +34,7 @@ class BookEditorState extends State<BookEditor> {
   @override
   void initState() {
     super.initState();
+
     focusNode = FocusNode();
 
     // future that allows us to access context. function is called inside the future
@@ -54,6 +61,10 @@ class BookEditorState extends State<BookEditor> {
     // get arguments from the BookBox
     BookEditorArgument arg = ModalRoute.of(context).settings.arguments;
 
+    // Create 'BookNoteCubit' instance
+    final BookNoteCubit noteCubit =
+        BlocProvider.of<BookNoteCubit>(arg.bookContext);
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: PreferredSize(
@@ -61,10 +72,11 @@ class BookEditorState extends State<BookEditor> {
           onSave: saveDocument,
           controller: controller,
           bookID: arg.book['bookID'],
+          noteCubit: noteCubit,
         ),
         preferredSize: Size.fromHeight(kToolbarHeight),
       ),
-      // If _controller is null we show loader, otherwise
+      // If controller is null we show loader, otherwise
       // display Zefyr editor.
       body: (controller == null)
           ? Loader()
@@ -72,7 +84,7 @@ class BookEditorState extends State<BookEditor> {
           // to be one of its parents.
           : ZefyrScaffold(
               child: ZefyrEditor(
-                padding: EdgeInsets.all(16.0),
+                padding: EdgeInsets.all(15.0),
                 controller: controller,
                 focusNode: focusNode,
                 mode: ZefyrMode.edit,

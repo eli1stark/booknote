@@ -1,3 +1,4 @@
+import 'package:booknote/application/book/note_state_cubit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:zefyr/zefyr.dart';
@@ -7,6 +8,7 @@ class EditorAppBar extends StatelessWidget {
     this.onSave,
     this.controller,
     this.bookID,
+    this.noteCubit,
   });
 
   final Function(
@@ -16,6 +18,7 @@ class EditorAppBar extends StatelessWidget {
   ) onSave;
   final ZefyrController controller;
   final String bookID;
+  final BookNoteCubit noteCubit;
 
   @override
   Widget build(BuildContext context) {
@@ -39,11 +42,10 @@ class EditorAppBar extends StatelessWidget {
               color: Colors.black,
               size: 35.0,
             ),
-            onPressed: () => onSave(
-              context,
-              controller,
-              bookID,
-            ),
+            onPressed: () {
+              onSave(context, controller, bookID);
+              noteCubit.update(controller);
+            },
           ),
         )
       ],
