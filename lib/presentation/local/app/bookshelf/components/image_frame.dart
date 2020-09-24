@@ -40,27 +40,30 @@ class ImageFrame extends StatelessWidget {
         );
       },
       child: SizedBox.expand(
-        child: Card(
-          color: Colors.white,
-          shadowColor: Colors.grey,
-          elevation: 10,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10.0),
+        child: Hero(
+          tag: linkPath,
+          child: Card(
+            color: Colors.white,
+            shadowColor: Colors.grey,
+            elevation: 10,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0),
+            ),
+            // semanticContainer and clipBehavior allow Card to overflow image
+            // and show its round corners
+            semanticContainer: true,
+            clipBehavior: Clip.antiAliasWithSaveLayer,
+            child: network
+                ? CachedNetworkImage(
+                    imageUrl: linkPath,
+                    fit: BoxFit.fill,
+                    fadeInCurve: Curves.easeIn,
+                  )
+                : Image.file(
+                    File(linkPath),
+                    fit: BoxFit.fill,
+                  ),
           ),
-          // semanticContainer and clipBehavior allow Card to overflow image
-          // and show its round corners
-          semanticContainer: true,
-          clipBehavior: Clip.antiAliasWithSaveLayer,
-          child: network
-              ? CachedNetworkImage(
-                  imageUrl: linkPath,
-                  fit: BoxFit.fill,
-                  fadeInCurve: Curves.easeIn,
-                )
-              : Image.file(
-                  File(linkPath),
-                  fit: BoxFit.fill,
-                ),
         ),
       ),
     );
