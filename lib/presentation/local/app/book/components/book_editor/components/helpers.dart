@@ -1,5 +1,6 @@
 import 'dart:convert'; // access to jsonEncode()
 import 'dart:io'; // access to File and Directory classes
+import 'package:booknote/presentation/global/theme/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:zefyr/zefyr.dart';
 import 'package:quill_delta/quill_delta.dart';
@@ -10,7 +11,7 @@ import 'package:path_provider/path_provider.dart';
 Future<NotusDocument> loadDocument(String bookID) async {
   // appDir path to the app_flutter file
   Directory appDocDir = await getApplicationDocumentsDirectory();
-  
+
   final file = File(appDocDir.path + '/$bookID.json');
 
   if (await file.exists()) {
@@ -36,14 +37,12 @@ void saveDocument(
   Directory appDocDir = await getApplicationDocumentsDirectory();
 
   final file = File(appDocDir.path + '/$bookID.json');
-  
+
   // Save our document.
   // And show a snack bar on success.
   file.writeAsString(contents).then((_) {
     Scaffold.of(context).showSnackBar(
-      SnackBar(
-        content: Text('SAVED'),
-      ),
+      snackBarBlack('SAVED'),
     );
   });
 }

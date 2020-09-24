@@ -1,3 +1,4 @@
+import 'package:booknote/presentation/global/theme/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:booknote/domain/auth/auth_state.dart';
@@ -51,7 +52,7 @@ class LogInSignUpButtons extends StatelessWidget {
                             // in case of error
                             if (result is String) {
                               Scaffold.of(context).showSnackBar(
-                                snackBarOnFailure(result),
+                                snackBarBlack(result),
                               );
                             }
                           } else {
@@ -64,7 +65,7 @@ class LogInSignUpButtons extends StatelessWidget {
                             // in case of error
                             if (result is String) {
                               Scaffold.of(context).showSnackBar(
-                                snackBarOnFailure(result),
+                                snackBarBlack(result),
                               );
                             }
                           }
