@@ -49,11 +49,14 @@ class BookCoverContainer extends StatelessWidget {
                   // images to take a lot of space
                   width: 200,
                 )
-              : Image.file(
-                  File(linkPath),
-                  fit: BoxFit.fill,
-                  width: 200,
-                ),
+              // checking for existing of the image
+              : File(linkPath).existsSync()
+                  ? Image.file(
+                      File(linkPath),
+                      fit: BoxFit.fill,
+                      width: 200,
+                    )
+                  : Container(),
         ),
       ),
     );

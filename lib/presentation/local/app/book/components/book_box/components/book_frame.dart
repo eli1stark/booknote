@@ -37,11 +37,18 @@ class BookFrame extends StatelessWidget {
                   height: size.height * 0.35,
                   fit: BoxFit.fill,
                 )
-              : Image.file(
-                  File(linkPath),
-                  height: size.height * 0.35,
-                  fit: BoxFit.fill,
-                ),
+              // checking for existing of the image
+              : File(linkPath).existsSync()
+                  ? Image.file(
+                      File(linkPath),
+                      height: size.height * 0.35,
+                      fit: BoxFit.fill,
+                    )
+                  : Image.asset(
+                      'assets/images/not_available.png',
+                      height: size.height * 0.35,
+                      fit: BoxFit.fill,
+                    ),
         ),
       ),
     );

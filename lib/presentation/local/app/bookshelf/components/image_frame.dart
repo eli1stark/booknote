@@ -59,10 +59,16 @@ class ImageFrame extends StatelessWidget {
                     fit: BoxFit.fill,
                     fadeInCurve: Curves.easeIn,
                   )
-                : Image.file(
-                    File(linkPath),
-                    fit: BoxFit.fill,
-                  ),
+                // checking for existing of the image
+                : File(linkPath).existsSync()
+                    ? Image.file(
+                        File(linkPath),
+                        fit: BoxFit.fill,
+                      )
+                    : Image.asset(
+                        'assets/images/not_available.png',
+                        fit: BoxFit.fill,
+                      ),
           ),
         ),
       ),

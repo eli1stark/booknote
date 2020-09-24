@@ -12,7 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  # Core
+  # IOS
   cupertino_icons: ^0.1.3
 
   # Helpers
@@ -26,26 +26,21 @@ dependencies:
   auto_size_text: ^2.1.0
   # custom spinners:
   flutter_spinkit: ^4.1.2+1
-  # upload images to the app
+  # upload images to the app:
   image_picker: ^0.6.7+7
-  # Zefyr (Note Editor)
+  # Zefyr (Note Editor):
   zefyr: ^0.11.0
-  # cashing network images
+  # cashing network images:
   cached_network_image: ^2.3.2+1
-  # accessing device paths
+  # accessing device paths:
   path_provider: ^1.6.18
 
-
   # State Management
-  # provider:
   provider: ^4.1.3
-  # bloc + cubit:
   flutter_bloc: ^6.0.5
 
   # Firebase
-  # authentication:
   firebase_auth: ^0.16.1
-  # database:
   cloud_firestore: ^0.13.7
 
 dev_dependencies:
@@ -62,14 +57,13 @@ flutter:
 
   uses-material-design: true
   assets:
-    - images/samples/
-    - images/
+    - assets/images/
 
   fonts:
     - family: Lato
       fonts:
-        - asset: fonts/Lato-Regular.ttf
+        - asset: assets/fonts/Lato-Regular.ttf
     - family: Itim
       fonts:
-        - asset: fonts/Itim-Regular.ttf
+        - asset: assets/fonts/Itim-Regular.ttf
 

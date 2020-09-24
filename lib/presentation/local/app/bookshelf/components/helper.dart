@@ -34,7 +34,7 @@ Widget processBooks({
   if (sortedBooks.length == 0) {
     return Card(
       child: AlertInfo(
-        image: 'images/no_content.png',
+        image: 'assets/images/no_content.png',
         text: 'No Content!',
       ),
     );

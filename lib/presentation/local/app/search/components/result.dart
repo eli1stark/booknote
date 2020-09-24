@@ -38,7 +38,7 @@ class SearchResult extends StatelessWidget {
               );
             } else {
               return AlertInfo(
-                image: 'images/not_found.png',
+                image: 'assets/images/not_found.png',
                 text: 'Not Found!',
               );
             }

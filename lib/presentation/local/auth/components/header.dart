@@ -11,7 +11,7 @@ class Header extends StatelessWidget {
       child: Align(
         alignment: Alignment.bottomLeft,
         child: Image.asset(
-          'images/cole-welcome.png',
+          'assets/images/welcome.png',
         ),
       ),
     );
