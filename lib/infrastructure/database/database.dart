@@ -77,7 +77,7 @@ class DatabaseService {
     @required String pathToLocalCustomCover,
     @required Map currentImage,
     @required int pagesRead,
-    @required String pathToNote,
+    @required String bookNote,
   }) {
     users.document(uid).collection('books').add({
       'categoryID': categoryID,
@@ -93,7 +93,7 @@ class DatabaseService {
       'pathToLocalCustomCover': pathToLocalCustomCover,
       'currentImage': currentImage,
       'pagesRead': pagesRead,
-      'pathToNote': pathToNote,
+      'bookNote': bookNote,
     });
   }
 

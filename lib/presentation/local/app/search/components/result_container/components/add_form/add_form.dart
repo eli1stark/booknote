@@ -105,7 +105,7 @@ class _AddBookFormState extends State<AddBookForm> {
                 pagesRead: 0,
                 // these values will be added during usage of the App
                 pathToLocalCustomCover: null,
-                pathToNote: null,
+                bookNote: null,
               );
 
               // go to the Bookshelf page
