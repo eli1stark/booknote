@@ -16,17 +16,22 @@ class Bookshelf extends StatelessWidget {
       // get user ID from the Stream
       String uid = Provider.of<AppUser>(context).uid;
 
-      // configure MultiProvider for Bookshelf
-      return MultiProvider(
-        providers: [
-          StreamProvider<CategoriesData>.value(
-            value: DatabaseService(uid: uid).categories,
-          ),
-          StreamProvider<QuerySnapshot>.value(
-            value: DatabaseService(uid: uid).books,
-          ),
-        ],
-        child: BookshelfDisplay(uid),
+      // disable Android back button on Auth Page to prevent crash
+      // related to the Auth Stream (problems with the package)
+      return WillPopScope(
+        onWillPop: () async => false,
+        // configure MultiProvider for Bookshelf
+        child: MultiProvider(
+          providers: [
+            StreamProvider<CategoriesData>.value(
+              value: DatabaseService(uid: uid).categories,
+            ),
+            StreamProvider<QuerySnapshot>.value(
+              value: DatabaseService(uid: uid).books,
+            ),
+          ],
+          child: BookshelfDisplay(uid),
+        ),
       );
     } else {
       return Loader();
