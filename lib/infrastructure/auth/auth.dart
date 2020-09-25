@@ -37,7 +37,7 @@ class AuthService {
     } on PlatformException catch (error) {
       return signUpErrorHandler(error);
     } catch (error) {
-      return 'An undefined Error happened.';
+      return 'An undefined Error happened';
     }
   }
 
@@ -53,7 +53,7 @@ class AuthService {
     } on PlatformException catch (error) {
       return signInErrorHandler(error);
     } catch (error) {
-      return 'An undefined Error happened.';
+      return 'An undefined Error happened';
     }
   }
 
@@ -64,7 +64,18 @@ class AuthService {
     } on PlatformException catch (error) {
       return error.message;
     } catch (error) {
-      return 'An undefined Error happened.';
+      return 'An undefined Error happened';
+    }
+  }
+
+  /// [reset password]
+  Future resetUserPassword(String email) async {
+    try {
+      return await _auth.sendPasswordResetEmail(email: email);
+    } on PlatformException catch (error) {
+      return resetPasswordErrorHandler(error);
+    } catch (error) {
+      return 'An undefined Error happened';
     }
   }
 }

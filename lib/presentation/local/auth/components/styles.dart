@@ -6,6 +6,11 @@ String emailHint = 'Please enter valid email address';
 /// PASSWORD HINT
 String passwordHint = 'Password needs to be at least 6+ characters';
 
+/// Forgot password Filed Style
+TextStyle forgotPasswordFieldStyle = TextStyle(
+  fontSize: 18.0,
+);
+
 /// EMAIL and PASSWORD Field Style
 TextStyle authFieldStyle = TextStyle(
   fontSize: 20.0,
@@ -77,3 +82,14 @@ BoxDecoration logInSignUpButtonDecoration = BoxDecoration(
 
 /// BorderRadius.circular(30.0)
 BorderRadius borderRadiusCiricular30 = BorderRadius.circular(30.0);
+
+/// Forgot password Dialog shape
+RoundedRectangleBorder forgotPasswordDialogShape = RoundedRectangleBorder(
+  borderRadius: BorderRadius.circular(20.0),
+);
+
+/// Forgot password Dialog padding
+EdgeInsets forgotPasswordDialogPadding = EdgeInsets.symmetric(
+  vertical: 20.0,
+  horizontal: 30.0,
+);

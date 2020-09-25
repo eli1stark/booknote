@@ -36,7 +36,7 @@ String signUpErrorHandler(PlatformException error) {
     case 'ERROR_EMAIL_ALREADY_IN_USE':
       return 'This email already exists. Try again!';
     default:
-      return 'An undefined Error happened.';
+      return 'An undefined Error happened';
   }
 }
 
@@ -55,6 +55,19 @@ String signInCredentialErrorHandler(PlatformException error) {
     case 'ERROR_INVALID_ACTION_CODE':
       return 'The action code in the link is malformed, expired, or has already been used';
     default:
-      return 'An undefined Error happened.';
+      return 'An undefined Error happened';
+  }
+}
+
+/// Takes PlatformException and returns String
+/// based on the error code. [RESET PASSWORD]
+String resetPasswordErrorHandler(PlatformException error) {
+  switch (error.code) {
+    case 'ERROR_INVALID_EMAIL':
+      return 'Email address is malformed';
+    case 'ERROR_USER_NOT_FOUND':
+      return 'There is no user corresponding to the given email address';
+    default:
+      return 'An undefined Error happened';
   }
 }

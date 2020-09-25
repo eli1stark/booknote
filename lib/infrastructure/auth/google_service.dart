@@ -44,7 +44,7 @@ class GoogleAuthService {
         // don't show snackBar
         return null;
       } else {
-        return 'An undefined Error happened.';
+        return 'An undefined Error happened';
       }
     }
   }
@@ -62,7 +62,7 @@ class GoogleAuthService {
     } on PlatformException catch (error) {
       return error.message;
     } catch (error) {
-      return 'An undefined Error happened.';
+      return 'An undefined Error happened';
     }
   }
 }

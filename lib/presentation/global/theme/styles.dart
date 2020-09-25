@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 /// Snack Bar for AuthFailure and NoteSave
-SnackBar snackBarBlack(String text) {
+SnackBar snackBarBlack(String text, {int duration = 2}) {
   return SnackBar(
     content: Text(
       text,
@@ -10,7 +10,7 @@ SnackBar snackBarBlack(String text) {
         fontWeight: FontWeight.bold,
       ),
     ),
-    duration: const Duration(seconds: 1),
+    duration: Duration(seconds: duration),
     backgroundColor: Colors.black,
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.only(
