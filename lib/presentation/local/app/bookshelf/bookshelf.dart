@@ -1,80 +1,40 @@
+import 'package:booknote/domain/auth/user.dart';
+import 'package:booknote/domain/categories/categories.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import '../../../../infrastructure/database/database.dart';
+import '../../../global/components/loader.dart';
 import 'package:flutter/material.dart';
-import '../../../global/components/big_title.dart';
-import 'components/app_bar.dart';
-import 'components/custom_gridview.dart';
-import 'components/image_frame.dart';
-import 'components/navigation/nav_menu.dart';
-import 'components/tabs/custom_tab.dart';
-import 'components/tabs/tab_divider.dart';
-import 'components/tabs/tabs_container.dart';
+import 'package:provider/provider.dart';
+import 'bookshelf_display.dart';
 
 class Bookshelf extends StatelessWidget {
   static const routeName = '/';
 
   @override
   Widget build(BuildContext context) {
-    TabController _controller;
+    if (Provider.of<AppUser>(context) != null) {
+      // get user ID from the Stream
+      String uid = Provider.of<AppUser>(context).uid;
 
-    return DefaultTabController(
-      length: 2,
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        appBar: bookshelfAppBar(context),
-        drawer: Drawer(
-          child: SafeArea(
-            child: NavigationMenu(),
-          ),
-        ),
-        body: Column(
-          children: <Widget>[
-            BigTitle(
-              text: 'Bookshelf',
-              size: 45.0,
+      // disable Android back button on Auth Page to prevent crash
+      // related to the Auth Stream (problems with the package)
+      return WillPopScope(
+        onWillPop: () async => false,
+        // configure MultiProvider for Bookshelf
+        child: MultiProvider(
+          providers: [
+            StreamProvider<CategoriesData>.value(
+              value: DatabaseService(uid: uid).categories,
             ),
-            TabsContainer(
-              controller: _controller,
-              tabs: tabs,
-            ),
-            TabDivider(),
-            Expanded(
-              child: TabBarView(
-                children: [
-                  for (int i = 0; i < 2; i++) CustomGridView(books)
-                ],
-              ),
+            StreamProvider<QuerySnapshot>.value(
+              value: DatabaseService(uid: uid).books,
             ),
           ],
+          child: BookshelfDisplay(uid),
         ),
-      ),
-    );
+      );
+    } else {
+      return Loader();
+    }
   }
 }
-
-// MOCK:
-List<Widget> tabs = [
-  CustomTab('Text1'),
-  CustomTab('Text2'),
-];
-// MOCK:
-List<Widget> books = [
-  ImageFrame(
-    imagePath: 'images/samples/book-1.jpeg',
-    networkImage: false,
-  ),
-  ImageFrame(
-    imagePath: 'images/samples/book-2.jpeg',
-    networkImage: false,
-  ),
-  ImageFrame(
-    imagePath: 'images/samples/book-3.jpeg',
-    networkImage: false,
-  ),
-  ImageFrame(
-    imagePath: 'images/samples/book-4.png',
-    networkImage: false,
-  ),
-  ImageFrame(
-    imagePath: 'images/samples/book-5.png',
-    networkImage: false,
-  )
-];

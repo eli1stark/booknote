@@ -1,140 +1,65 @@
-import 'package:booknote/domain/categories/categories.dart';
+import 'package:booknote/application/search/search_state_cubit.dart';
+import 'package:booknote/domain/search/search_state.dart';
 import 'package:booknote/infrastructure/api/methods_api.dart';
-import 'package:booknote/presentation/global/components/alert_info.dart';
-import 'package:booknote/presentation/global/components/loader.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'components/app_bar.dart';
-import 'components/divider.dart';
-import 'components/container/container.dart';
-import 'package:provider/provider.dart';
-import 'components/helpers.dart';
+import 'components/result.dart';
 
-class Search extends StatefulWidget {
+class SearchArgument {
+  SearchArgument(
+    this.categories,
+    this.uid,
+  );
+
+  List categories;
+  String uid;
+}
+
+class Search extends StatelessWidget {
   static const routeName = '/search';
 
   @override
-  _SearchState createState() => _SearchState();
-}
-
-var resultFromAPI;
-
-bool isLoading = false;
-
-// categories from databse
-var categories;
-
-class _SearchState extends State<Search> {
-  @override
   Widget build(BuildContext context) {
-    // check size of the user's phone
-    Size size = MediaQuery.of(context).size;
+    // Get arguments('categories' and 'uid') from Bookshelf page
+    SearchArgument arg = ModalRoute.of(context).settings.arguments;
 
-    return WillPopScope(
-      // on Android back button
-      onWillPop: () async {
-        // clear search result
-        setState(() => resultFromAPI = null);
-        // go back to Bookshelf page
-        Navigator.pop(context);
-        // I need to return something
-        return true;
-      },
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        appBar: PreferredSize(
-          child: SearchAppBar(
-            // on Material back button
-            onPressed: () {
-              // clear search result
-              setState(() => resultFromAPI = null);
-              // go back to Bookshelf page
-              Navigator.pop(context);
-            },
-            // on Search
-            onFieldSubmitted: (input) async {
-              if (input != '') {
-                // start Loading
-                setState(() => isLoading = true);
+    return BlocProvider<SearchStateCubit>(
+      create: (BuildContext context) => SearchStateCubit(),
+      child: BlocBuilder<SearchStateCubit, SearchState>(
+        builder: (context, searchState) {
+          // Create 'SearchStateCubit' instance
+          SearchStateCubit searchCubit =
+              BlocProvider.of<SearchStateCubit>(context);
 
-                // get Result from the Google API
-                resultFromAPI = await getBooksFromGoogleApi(input);
+          return Scaffold(
+            backgroundColor: Colors.white,
+            appBar: PreferredSize(
+              child: SearchAppBar(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                // on Search
+                onFieldSubmitted: (input) async {
+                  if (input != '') {
+                    searchCubit.startLoading(searchState);
 
-                // get categories from the Stream(from the Database)
-                // listen: false, because I don't need to listen for the Stream
-                // becasue I need this value only once and it won't change on this page
-                categories = Provider.of<CategoriesData>(context, listen: false)
-                    .categories;
-
-                // end Loading
-                setState(() => isLoading = false);
-              }
-            },
-          ),
-          preferredSize: Size.fromHeight(kToolbarHeight),
-        ),
-        body: SafeArea(
-          // implement loading during search
-          child: isLoading
-              ? Loader()
-              : Container(
-                  // check whether the search was called
-                  child: resultFromAPI != null
-                      ? Container(
-                          // check whether the search found something
-                          child: resultFromAPI['totalItems'] != 0
-                              ? ListView(
-                                  children: <Widget>[
-                                    for (var result in resultFromAPI['items'])
-                                      // If image is not available then skip it
-                                      processImage(result['volumeInfo']) == null
-                                          ? Container()
-                                          : Column(
-                                              children: [
-                                                SearchResultContainer(
-                                                  size: size,
-                                                  title: result['volumeInfo']
-                                                      ['title'],
-                                                  authors: processAuthors(
-                                                    result['volumeInfo']
-                                                        ['publisher'],
-                                                    result['volumeInfo']
-                                                        ['authors'],
-                                                  ),
-                                                  pages: processPages(
-                                                    result['volumeInfo']
-                                                        ['pageCount'],
-                                                  ),
-                                                  published: dataConverter(
-                                                    result['volumeInfo']
-                                                        ['publishedDate'],
-                                                  ),
-                                                  image: processImage(
-                                                    result['volumeInfo'],
-                                                  ),
-                                                  bookID: result['id'],
-                                                  categories: categories,
-                                                ),
-                                                SearchResultDivider(),
-                                              ],
-                                            ),
-                                  ],
-                                )
-                              : AlertInfo(
-                                  // nothing found
-                                  image: 'images/not_found.png',
-                                  text: 'Not Found!',
-                                  size: size,
-                                ),
-                        )
-                      : Container(),
-                ),
-        ),
+                    // get Result from the Google API and end Loading
+                    searchCubit.updateResult(
+                      await getBooksFromGoogleApi(input),
+                      searchState,
+                    );
+                  }
+                },
+              ),
+              preferredSize: Size.fromHeight(kToolbarHeight),
+            ),
+            body: SafeArea(
+              child: SearchResult(arg.categories, arg.uid),
+            ),
+          );
+        },
       ),
     );
   }
 }
-
-// TODO remove last divider in the search listview
-// FIXME some problem when I type some of the words I getting white screen
-// but should get result or alert info that image is not found
-// screenshots on the phone

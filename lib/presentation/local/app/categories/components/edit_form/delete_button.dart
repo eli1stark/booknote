@@ -10,24 +10,20 @@ class DeleteButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Positioned(
-      top: 5.0,
-      right: 5.0,
-      child: Material(
+    return Material(
+      borderRadius: BorderRadius.circular(20.0),
+      color: Colors.grey[200],
+      child: InkWell(
         borderRadius: BorderRadius.circular(20.0),
-        color: Colors.grey[200],
-        child: InkWell(
-          borderRadius: BorderRadius.circular(20.0),
-          child: Container(
-            padding: EdgeInsets.all(12.0),
-            child: FaIcon(
-              FontAwesomeIcons.trashAlt,
-              color: Colors.black,
-              size: 35.0,
-            ),
+        child: Container(
+          padding: EdgeInsets.all(12.0),
+          child: FaIcon(
+            FontAwesomeIcons.trashAlt,
+            color: Colors.black,
+            size: 35.0,
           ),
-          onTap: onTap,
         ),
+        onTap: onTap,
       ),
     );
   }

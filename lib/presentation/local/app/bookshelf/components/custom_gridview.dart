@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'image_frame.dart';
 
 class CustomGridView extends StatefulWidget {
-  CustomGridView(this.books);
+  CustomGridView(this.sortedBooks);
 
-  final List<Widget> books;
+  final List<ImageFrame> sortedBooks;
 
   @override
   _CustomGridViewState createState() => _CustomGridViewState();
@@ -33,7 +34,7 @@ class _CustomGridViewState extends State<CustomGridView>
           bottom: 10.0,
         ),
         childAspectRatio: (70 / 100),
-        children: widget.books,
+        children: widget.sortedBooks,
       ),
     );
   }

@@ -1,16 +1,21 @@
 import 'package:booknote/infrastructure/database/database.dart';
-import 'package:booknote/presentation/global/theme/constants.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../../../../../global/components/submit_button.dart';
 import '../../../emoji_picker/emoji_picker.dart';
 import 'package:flutter/material.dart';
+import '../styles.dart';
+import 'helper.dart';
 
 class AddForm extends StatefulWidget {
   AddForm(
     this.categories,
     this.idCounter,
+    this.uid,
   );
 
   final List categories;
   final int idCounter;
+  final String uid;
 
   @override
   _AddFormState createState() => _AddFormState();
@@ -57,24 +62,10 @@ class _AddFormState extends State<AddForm> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          Text(
-            'Add new category',
-            style: TextStyle(
-              fontSize: 20.0,
-            ),
-          ),
-          SizedBox(height: 20.0),
-          TextFormField(
-            decoration: textInputDecoration,
-            textCapitalization: TextCapitalization.sentences,
-            validator: (value) => value.isEmpty ? 'Please enter text' : null,
-            onChanged: (value) => _item['title'] = value,
-          ),
-          SizedBox(height: 20.0),
           InkWell(
             child: _item['emoji'] == ''
                 ? Icon(
-                    Icons.tag_faces,
+                    FontAwesomeIcons.smile,
                     size: 50.0,
                     color: Colors.black,
                   )
@@ -85,19 +76,21 @@ class _AddFormState extends State<AddForm> {
                     ),
                   ),
             customBorder: CircleBorder(),
-            onTap: () {
-              goToEmojiPickerPage();
-            },
+            onTap: () => goToEmojiPickerPage(),
           ),
-          SizedBox(height: 10.0),
-          RaisedButton(
-            color: Colors.grey[600],
-            child: Text(
-              'Add',
-              style: TextStyle(
-                color: Colors.white,
-              ),
-            ),
+          SizedBox(height: 20.0),
+          TextFormField(
+            decoration: categoryFieldDecoration,
+            textCapitalization: TextCapitalization.sentences,
+            validator: (value) => addFieldValidator(value, widget.categories),
+            onChanged: (value) => _item['title'] = value,
+          ),
+          SizedBox(height: 20.0),
+          SubmitButton(
+            text: 'ADD',
+            color: Colors.black,
+            size: 20.0,
+            splashColor: Colors.grey[300],
             onPressed: () async {
               if (_formKey.currentState.validate()) {
                 // update index of the item
@@ -110,7 +103,7 @@ class _AddFormState extends State<AddForm> {
                 widget.categories.add(_item);
 
                 // update Firestore
-                DatabaseService().addCategory(
+                DatabaseService(uid: widget.uid).addCategory(
                   widget.categories,
                   _item['id'],
                 );

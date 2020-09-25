@@ -1,69 +1,85 @@
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'components/move_buttons.dart';
 import 'components/move_category.dart';
-import 'components/move_spacer.dart';
+import 'components/move_spacers.dart';
 import 'components/move_title.dart';
-import '../components/content_container.dart';
 
-Dialog moveBookDialog(BuildContext context) {
-  return BookMenuContentContainer(
-    child: Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        BookMoveTitle('From:'),
-        BookMoveSpacer(),
-        // TODO get current category
-        BookMoveCategory('🦿Ficition'),
-        BookMoveSpacer(),
-        BookMoveTitle('To:'),
-        DropdownButton<String>(
-          value: categories[0]['emoji'] + categories[0]['title'],
-          isExpanded: true,
-          hint: BookMoveTitle('Select category'),
-          icon: Icon(Icons.arrow_downward),
-          iconSize: 26,
-          elevation: 16,
-          style: TextStyle(color: Colors.black),
-          underline: Container(
-            height: 2,
-            color: Colors.grey,
-          ),
-          onChanged: (String newValue) {
-            // TODO
-          },
-          items: [
-            for (Map category in categories)
-              DropdownMenuItem<String>(
-                value: category['emoji'] + category['title'],
-                child: BookMoveCategory(
-                  category['emoji'] + category['title'],
-                ),
-              ),
-          ],
-        ),
-        BookMoveSpacer(),
-        BookMoveButtons()
-      ],
-    ),
-  );
+class BookMove extends StatefulWidget {
+  BookMove({
+    @required this.documentID,
+    @required this.currentCategory,
+    @required this.categories,
+    @required this.uid,
+  });
+
+  final String documentID;
+  final Map currentCategory;
+  final List categories;
+  final String uid;
+
+  @override
+  _BookMoveState createState() => _BookMoveState();
 }
 
-List categories = [
-  {
-    'emoji': '🦿',
-    'title': 'Fiction',
-  },
-  {
-    'emoji': '🎩',
-    'title': 'Science',
-  },
-  {
-    'emoji': '🎯',
-    'title': 'Favorite',
-  },
-  {
-    'emoji': '🐭',
-    'title': 'Read',
-  },
-];
+class _BookMoveState extends State<BookMove> {
+  // default to the first category in the list
+  int chosenCategoryIndex = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    List newCategories = [];
+
+    // sort categories (remove current category)
+    for (var i in widget.categories) {
+      if (i != widget.currentCategory) {
+        newCategories.add(i);
+      }
+    }
+
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        BookMoveTitle('From'),
+        BookMoveSpacer10px(),
+        BookMoveCategory(
+          widget.currentCategory,
+        ),
+        // BookMoveSpacer(),
+        BookMoveSpacer20px(),
+        BookMoveTitle('To'),
+        Container(
+          height: 90,
+          width: 200,
+          child: CupertinoPicker(
+            itemExtent: 30,
+            diameterRatio: 1,
+            scrollController: FixedExtentScrollController(
+              initialItem: chosenCategoryIndex,
+            ),
+            onSelectedItemChanged: (int index) =>
+                setState(() => chosenCategoryIndex = index),
+            children: [
+              for (Map category in newCategories)
+                Center(
+                  child: AutoSizeText(
+                    category['emoji'] + category['title'],
+                    maxLines: 1,
+                  ),
+                )
+            ],
+          ),
+        ),
+        BookMoveSpacer20px(),
+        BookMoveButtons(
+          documentID: widget.documentID,
+          chosenCategoryIndex: chosenCategoryIndex,
+          newCategories: newCategories,
+          uid: widget.uid,
+        )
+      ],
+    );
+  }
+}

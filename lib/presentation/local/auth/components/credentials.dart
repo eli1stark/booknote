@@ -4,6 +4,7 @@ import 'package:booknote/domain/auth/auth_state.dart';
 import 'package:booknote/domain/auth/credentials.dart';
 import '../../../../application/auth/auth_state_cubit.dart';
 import '../../../../application/auth/credentials_cubit.dart';
+import 'forgot_password/forgot_password.dart';
 import 'helpers.dart';
 import 'styles.dart';
 
@@ -63,23 +64,7 @@ class EmailPassword extends StatelessWidget {
                     if (authState == AuthState.login)
                       Align(
                         alignment: Alignment.bottomRight,
-                        child: InkWell(
-                          splashColor: Colors.transparent,
-                          highlightColor: Colors.transparent,
-                          onTap: () {
-                            // todo forgotPassword()
-                            print('forgot password');
-                          },
-                          child: Container(
-                            padding: EdgeInsets.symmetric(
-                              vertical: size.height * 0.0065,
-                            ),
-                            child: Text(
-                              'Forgot Password?',
-                              style: forgotPasswordStyle,
-                            ),
-                          ),
-                        ),
+                        child: ForgotPassword(),
                       )
                   ],
                 ),

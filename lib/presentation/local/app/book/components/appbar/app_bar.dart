@@ -1,11 +1,23 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '../../../bookshelf/bookshelf.dart';
 import 'package:flutter/material.dart';
 import 'components/constants.dart';
 import 'components/on_selected.dart';
 import 'components/menu_icon.dart';
 
 class BookAppBar extends StatelessWidget {
+  BookAppBar({
+    @required this.book,
+    @required this.uid,
+    @required this.currentCategory,
+    @required this.categories,
+  });
+
+  final DocumentSnapshot book;
+  final String uid;
+  final Map currentCategory;
+  final List categories;
+
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -18,7 +30,8 @@ class BookAppBar extends StatelessWidget {
           color: Colors.black,
           size: 35.0,
         ),
-        onPressed: () => Navigator.pushNamed(context, Bookshelf.routeName),
+        // was pushNamed Bookshelf before
+        onPressed: () => Navigator.pop(context),
       ),
       actions: <Widget>[
         PopupMenuButton<String>(
@@ -58,7 +71,14 @@ class BookAppBar extends StatelessWidget {
               );
             }).toList();
           },
-          onSelected: (action) => onSelected(action, context),
+          onSelected: (action) => onSelected(
+            action: action,
+            context: context,
+            book: book,
+            currentCategory: currentCategory,
+            categories: categories,
+            uid: uid,
+          ),
         ),
       ],
     );

@@ -1,8 +1,11 @@
-import 'package:booknote/presentation/global/theme/constants.dart';
 import 'package:flutter/material.dart';
+import 'styles.dart';
 
 class SearchAppBar extends StatelessWidget {
-  SearchAppBar({this.onPressed, this.onFieldSubmitted});
+  SearchAppBar({
+    this.onPressed,
+    this.onFieldSubmitted,
+  });
 
   final Function onPressed;
   final Function onFieldSubmitted;
@@ -29,7 +32,7 @@ class SearchAppBar extends StatelessWidget {
         child: TextFormField(
           textInputAction: TextInputAction.search,
           textCapitalization: TextCapitalization.sentences,
-          decoration: searchInputDecoration,
+          decoration: searchFieldDecoration,
           autofocus: true,
           onFieldSubmitted: onFieldSubmitted,
         ),

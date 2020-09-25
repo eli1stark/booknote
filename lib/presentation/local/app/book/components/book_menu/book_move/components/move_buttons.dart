@@ -1,7 +1,21 @@
+import 'package:booknote/infrastructure/database/database.dart';
+import 'package:booknote/presentation/global/components/submit_button.dart';
 import '../../../../../bookshelf/bookshelf.dart';
 import 'package:flutter/material.dart';
 
 class BookMoveButtons extends StatelessWidget {
+  BookMoveButtons({
+    @required this.documentID,
+    @required this.chosenCategoryIndex,
+    @required this.newCategories,
+    @required this.uid,
+  });
+
+  final String documentID;
+  final int chosenCategoryIndex;
+  final List newCategories;
+  final String uid;
+
   @override
   Widget build(BuildContext context) {
     // check size of the user's phone
@@ -10,33 +24,19 @@ class BookMoveButtons extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        FlatButton(
-          highlightColor: Colors.transparent,
-          splashColor: Colors.grey[200],
-          child: Text(
-            'CANCEL',
-            style: TextStyle(
-              color: Colors.grey,
-              fontSize: 17.0,
-            ),
-          ),
-          // color: Colors.grey[300],
+        SubmitButton(
+          text: 'CANCEL',
           onPressed: () => Navigator.pop(context),
         ),
-        SizedBox(width: size.width * 0.0487),
-        FlatButton(
-          highlightColor: Colors.transparent,
-          splashColor: Colors.grey[200],
-          child: Text(
-            'SUBMIT',
-            style: TextStyle(
-              color: Colors.grey,
-              fontSize: 17.0,
-            ),
-          ),
-          // color: Colors.grey[300],
+        SizedBox(width: size.width * 0.03),
+        SubmitButton(
+          text: 'SUBMIT',
           onPressed: () {
-            // TODO move the book
+            DatabaseService(uid: uid).updateBookCategoryID(
+              documentID,
+              newCategories[chosenCategoryIndex]['id'],
+            );
+
             Navigator.pushNamed(context, Bookshelf.routeName);
           },
         ),

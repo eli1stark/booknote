@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:meta/meta.dart';
-
 import 'package:booknote/domain/categories/categories.dart';
 
 class DatabaseService {
@@ -29,7 +28,6 @@ class DatabaseService {
 
   /// [CATEGORIES] categories from snapshot
   CategoriesData _categoriesFromSnapshot(DocumentSnapshot snapshot) {
-    print(snapshot.data);
     return CategoriesData(
       categories: snapshot.data['categories'],
       idCounter: snapshot.data['categoryIdCounter'],
@@ -61,21 +59,25 @@ class DatabaseService {
     return users.document(uid).collection('books').snapshots();
   }
 
-  /// [SEARCH] add new book
+  /// [SEARCH] add new book \
+  /// currentImage = {'linkPath': 'Path or Link', 'network': true or false} \
+  /// by default to NetworkLargeCover if it exists, else to NetworkThumbnailCover \
+  /// If user gave storage privilege, image will be cached and local path will be used
   void addNewBook({
     @required int categoryID,
     @required String bookID,
     @required String title,
     @required String authors,
     @required String publisher,
-    @required String categories,
+    @required String categoryType,
     @required String published,
-    @required String pages,
+    @required int pages,
     @required String linkToNetworkLargeCover,
     @required String linkToNetworkThumbnailCover,
-    @required String pathToLocalLargeCover,
-    @required String pathToLocalThumbnailCover,
     @required String pathToLocalCustomCover,
+    @required Map currentImage,
+    @required int pagesRead,
+    @required String bookNote,
   }) {
     users.document(uid).collection('books').add({
       'categoryID': categoryID,
@@ -83,14 +85,71 @@ class DatabaseService {
       'title': title,
       'authors': authors,
       'publisher': publisher,
-      'categories': categories,
+      'categoryType': categoryType,
       'published': published,
       'pages': pages,
       'linkToNetworkLargeCover': linkToNetworkLargeCover,
       'linkToNetworkThumbnailCover': linkToNetworkThumbnailCover,
-      'pathToLocalLargeCover': pathToLocalLargeCover,
-      'pathToLocalThumbnailCover': pathToLocalThumbnailCover,
       'pathToLocalCustomCover': pathToLocalCustomCover,
+      'currentImage': currentImage,
+      'pagesRead': pagesRead,
+      'bookNote': bookNote,
+    });
+  }
+
+  /// [BOOK] will update 'pages' and 'pagesRead' values
+  void updateBookPages(
+    String documentID,
+    int pages,
+    int pagesRead,
+  ) {
+    users.document(uid).collection('books').document(documentID).updateData({
+      'pages': pages,
+      'pagesRead': pagesRead,
+    });
+  }
+
+  /// [BOOK] will update category of the Book
+  void updateBookCategoryID(
+    String documentID,
+    int categoryID,
+  ) {
+    users.document(uid).collection('books').document(documentID).updateData({
+      'categoryID': categoryID,
+    });
+  }
+
+  /// [BOOK] Delete Book(document) from the collection
+  void deleteBook(String documentID) {
+    users.document(uid).collection('books').document(documentID).delete();
+  }
+
+  /// [BOOK] [COVER] Update Current Image
+  void updateCurrentImage(
+    String linkPath,
+    bool network,
+    String documentID,
+  ) {
+    users.document(uid).collection('books').document(documentID).updateData({
+      'currentImage': {
+        'linkPath': linkPath,
+        'network': network,
+      },
+    });
+  }
+
+  /// [BOOK] [COVER] Update Custom Image
+  /// and automatically select uploaded image
+  void updateCustomImage(
+    String linkPath,
+    String documentID,
+  ) {
+    users.document(uid).collection('books').document(documentID).updateData({
+      'pathToLocalCustomCover': linkPath,
+      'currentImage': {
+        'linkPath': linkPath,
+        'network': false,
+      },
     });
   }
 }

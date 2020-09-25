@@ -8,7 +8,7 @@ class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   /// create AppUser object based on FirebaseUser
-  AppUser _userFromFirebaseUser(FirebaseUser user) {
+  AppUser userFromFirebaseUser(FirebaseUser user) {
     if (user != null) {
       return AppUser(uid: user.uid);
     } else {
@@ -16,12 +16,12 @@ class AuthService {
     }
   }
 
-  /// update user stream if user signed in/up/out
+  /// [STREAM] update user stream if user signed in/up/out
   Stream<AppUser> get user {
-    return _auth.onAuthStateChanged.map(_userFromFirebaseUser);
+    return _auth.onAuthStateChanged.map(userFromFirebaseUser);
   }
 
-  /// register with email and password
+  /// [sign up] with email and password
   Future signUpWithEmailAndPassword(String email, String password) async {
     try {
       AuthResult result = await _auth.createUserWithEmailAndPassword(
@@ -33,15 +33,15 @@ class AuthService {
       // create a new document for the user
       await DatabaseService(uid: user.uid).setUserData();
 
-      return _userFromFirebaseUser(user);
+      return userFromFirebaseUser(user);
     } on PlatformException catch (error) {
       return signUpErrorHandler(error);
     } catch (error) {
-      return 'An undefined Error happened.';
+      return 'An undefined Error happened';
     }
   }
 
-  /// sign in with email and password
+  /// [sign in] with email and password
   Future signInWithEmailAndPassword(String email, String password) async {
     try {
       AuthResult result = await _auth.signInWithEmailAndPassword(
@@ -49,20 +49,33 @@ class AuthService {
         password: password,
       );
       FirebaseUser user = result.user;
-      return _userFromFirebaseUser(user);
+      return userFromFirebaseUser(user);
     } on PlatformException catch (error) {
       return signInErrorHandler(error);
     } catch (error) {
-      return 'An undefined Error happened.';
+      return 'An undefined Error happened';
     }
   }
 
-  /// sign out
+  /// [sign out]
   Future signOut() async {
     try {
       return await _auth.signOut();
+    } on PlatformException catch (error) {
+      return error.message;
     } catch (error) {
-      return null;
+      return 'An undefined Error happened';
+    }
+  }
+
+  /// [reset password]
+  Future resetUserPassword(String email) async {
+    try {
+      return await _auth.sendPasswordResetEmail(email: email);
+    } on PlatformException catch (error) {
+      return resetPasswordErrorHandler(error);
+    } catch (error) {
+      return 'An undefined Error happened';
     }
   }
 }

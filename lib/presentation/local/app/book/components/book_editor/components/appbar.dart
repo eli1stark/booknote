@@ -1,24 +1,54 @@
-import 'package:booknote/presentation/global/components/app_bar.dart';
+import 'package:booknote/application/book/note_state_cubit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:zefyr/zefyr.dart';
 
-// TODO remove
 class EditorAppBar extends StatelessWidget {
-  EditorAppBar({this.onTapRight});
+  EditorAppBar({
+    this.onSave,
+    this.controller,
+    this.bookID,
+    this.noteCubit,
+  });
 
-  final Function onTapRight;
+  final Function(
+    BuildContext context,
+    ZefyrController controller,
+    String bookID,
+  ) onSave;
+  final ZefyrController controller;
+  final String bookID;
+  final BookNoteCubit noteCubit;
 
   @override
   Widget build(BuildContext context) {
-    return MainAppBar(
-      fontAwesome: true,
-      iconRight: FontAwesomeIcons.save,
-      onTapLeft: () {
-        Navigator.pop(context);
-      },
-      onTapRight: (context) {
-        onTapRight(context);
-      },
+    return AppBar(
+      elevation: 0,
+      backgroundColor: Colors.white,
+      leading: IconButton(
+        highlightColor: Colors.transparent,
+        icon: Icon(
+          Icons.arrow_back,
+          color: Colors.black,
+          size: 35.0,
+        ),
+        onPressed: () => Navigator.pop(context),
+      ),
+      actions: <Widget>[
+        Builder(
+          builder: (context) => IconButton(
+            icon: Icon(
+              FontAwesomeIcons.save,
+              color: Colors.black,
+              size: 35.0,
+            ),
+            onPressed: () {
+              onSave(context, controller, bookID);
+              noteCubit.update(controller);
+            },
+          ),
+        )
+      ],
     );
   }
 }

@@ -1,41 +1,37 @@
+import 'package:booknote/application/book/cover_state_cubit.dart';
+import 'package:booknote/infrastructure/database/database.dart';
+import 'package:booknote/presentation/global/components/submit_button.dart';
 import 'package:flutter/material.dart';
 
 class CoverUploadButton extends StatelessWidget {
-  const CoverUploadButton(this.onTap);
+  const CoverUploadButton({
+    this.onTap,
+    this.coverCubit,
+    this.database,
+    this.documentID,
+  });
 
-  final Future Function() onTap;
+  final Future Function(
+    CoverStateCubit,
+    DatabaseService,
+    String,
+  ) onTap;
+  final CoverStateCubit coverCubit;
+  final DatabaseService database;
+  final String documentID;
 
   @override
   Widget build(BuildContext context) {
-    // check size of the user's phone
-    Size size = MediaQuery.of(context).size;
-
     return Center(
-      child: InkWell(
-        borderRadius: BorderRadius.circular(15.0),
-        onTap: () {
-          print('Tap');
-          onTap();
-        },
-        child: Container(
-          padding: EdgeInsets.symmetric(
-            vertical: size.height * 0.0147,
-            horizontal: size.width * 0.049,
-          ),
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: Colors.grey,
-              width: size.width * 0.0073,
-            ),
-            borderRadius: BorderRadius.circular(15.0),
-            // color: Colors.grey[100],
-          ),
-          child: Text(
-            'Upload Image',
-            style: TextStyle(
-              fontSize: size.width * 0.061,
-            ),
-          ),
+      child: SubmitButton(
+        text: 'UPLOAD IMAGE',
+        size: 25.0,
+        color: Colors.black,
+        fontWeight: FontWeight.bold,
+        onPressed: () => onTap(
+          coverCubit,
+          database,
+          documentID,
         ),
       ),
     );
