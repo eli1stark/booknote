@@ -1,3 +1,4 @@
+import 'package:booknote/infrastructure/auth/google_service.dart';
 import 'package:booknote/presentation/global/theme/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,6 +23,9 @@ class LogInSignUpButtons extends StatelessWidget {
 
     // create an instance of Authentication Service
     final AuthService _auth = AuthService();
+
+    // create an instance of Google Auth Service
+    final GoogleAuthService _googleAuth = GoogleAuthService();
 
     return BlocBuilder<AuthStateCubit, AuthState>(
       builder: (context, authState) {
@@ -49,7 +53,7 @@ class LogInSignUpButtons extends StatelessWidget {
                               credentialsState.password,
                             );
 
-                            // in case of error
+                            // in case of an error
                             if (result is String) {
                               Scaffold.of(context).showSnackBar(
                                 snackBarBlack(result),
@@ -62,7 +66,7 @@ class LogInSignUpButtons extends StatelessWidget {
                               credentialsState.password,
                             );
 
-                            // in case of error
+                            // in case of an error
                             if (result is String) {
                               Scaffold.of(context).showSnackBar(
                                 snackBarBlack(result),
@@ -80,8 +84,15 @@ class LogInSignUpButtons extends StatelessWidget {
                   InkWell(
                     highlightColor: Colors.transparent,
                     borderRadius: borderRadiusCiricular30,
-                    onTap: () {
-                      // todo Google Sign In
+                    onTap: () async {
+                      dynamic result = await _googleAuth.signInWithGoogle();
+
+                      // in case of an error
+                      if (result is String) {
+                        Scaffold.of(context).showSnackBar(
+                          snackBarBlack(result),
+                        );
+                      }
                     },
                     child: GoogleButton(),
                   ),

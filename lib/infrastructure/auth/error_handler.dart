@@ -1,7 +1,7 @@
 import 'package:flutter/services.dart';
 
 /// Takes PlatformException and returns String
-/// based on the error code.
+/// based on the error code. [EMAIL]
 String signInErrorHandler(PlatformException error) {
   switch (error.code) {
     // this case won't appear since I validate email on my side
@@ -24,9 +24,8 @@ String signInErrorHandler(PlatformException error) {
 }
 
 /// Takes PlatformException and returns String
-/// based on the error code.
+/// based on the error code. [EMAIL]
 String signUpErrorHandler(PlatformException error) {
-  print(error);
   switch (error.code) {
     // this case won't appear since I validate email on my side
     case 'ERROR_INVALID_EMAIL':
@@ -36,6 +35,25 @@ String signUpErrorHandler(PlatformException error) {
       return 'Your password is not strong enough. Try again!';
     case 'ERROR_EMAIL_ALREADY_IN_USE':
       return 'This email already exists. Try again!';
+    default:
+      return 'An undefined Error happened.';
+  }
+}
+
+/// Takes PlatformException and returns String
+/// based on the error code. [CREDENTIALS]
+String signInCredentialErrorHandler(PlatformException error) {
+  switch (error.code) {
+    case 'ERROR_INVALID_CREDENTIAL':
+      return 'The credential data is malformed or has expired';
+    case 'ERROR_USER_DISABLED':
+      return 'The user has been disabled';
+    case 'ERROR_ACCOUNT_EXISTS_WITH_DIFFERENT_CREDENTIAL':
+      return 'There already exists an account with the email address asserted by Google';
+    case 'ERROR_OPERATION_NOT_ALLOWED':
+      return 'Google accounts are not enabled. Contact support!';
+    case 'ERROR_INVALID_ACTION_CODE':
+      return 'The action code in the link is malformed, expired, or has already been used';
     default:
       return 'An undefined Error happened.';
   }

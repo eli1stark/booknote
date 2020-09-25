@@ -1,7 +1,9 @@
 import 'package:booknote/infrastructure/auth/auth.dart';
+import 'package:booknote/infrastructure/auth/google_service.dart';
 import '../../../categories/categories.dart';
 import 'package:flutter/material.dart';
 import '../../../about/about.dart';
+import 'helper.dart';
 import 'nav_item.dart';
 import 'nav_title.dart';
 
@@ -40,7 +42,17 @@ class NavigationMenu extends StatelessWidget {
         ),
         MenuItem(
           text: 'Sign out',
-          onTap: () async => await AuthService().signOut(),
+          onTap: () async {
+            dynamic authResult = await AuthService().signOut();
+            dynamic googleResult =
+                await GoogleAuthService().signOutWithGoogle();
+
+            // in case of an Auth error
+            signOutErrorCheck(context, authResult);
+
+            // in case of an Google error
+            signOutErrorCheck(context, googleResult);
+          },
         ),
       ],
     );

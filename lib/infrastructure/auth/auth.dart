@@ -8,7 +8,7 @@ class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   /// create AppUser object based on FirebaseUser
-  AppUser _userFromFirebaseUser(FirebaseUser user) {
+  AppUser userFromFirebaseUser(FirebaseUser user) {
     if (user != null) {
       return AppUser(uid: user.uid);
     } else {
@@ -18,7 +18,7 @@ class AuthService {
 
   /// [STREAM] update user stream if user signed in/up/out
   Stream<AppUser> get user {
-    return _auth.onAuthStateChanged.map(_userFromFirebaseUser);
+    return _auth.onAuthStateChanged.map(userFromFirebaseUser);
   }
 
   /// [sign up] with email and password
@@ -33,7 +33,7 @@ class AuthService {
       // create a new document for the user
       await DatabaseService(uid: user.uid).setUserData();
 
-      return _userFromFirebaseUser(user);
+      return userFromFirebaseUser(user);
     } on PlatformException catch (error) {
       return signUpErrorHandler(error);
     } catch (error) {
@@ -49,7 +49,7 @@ class AuthService {
         password: password,
       );
       FirebaseUser user = result.user;
-      return _userFromFirebaseUser(user);
+      return userFromFirebaseUser(user);
     } on PlatformException catch (error) {
       return signInErrorHandler(error);
     } catch (error) {
@@ -61,8 +61,10 @@ class AuthService {
   Future signOut() async {
     try {
       return await _auth.signOut();
+    } on PlatformException catch (error) {
+      return error.message;
     } catch (error) {
-      return null;
+      return 'An undefined Error happened.';
     }
   }
 }
