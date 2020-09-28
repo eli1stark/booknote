@@ -23,8 +23,6 @@ class Booknote extends StatelessWidget {
     return StreamProvider<AppUser>.value(
       value: AuthService().user,
       child: MaterialApp(
-        // remove debug banner
-        debugShowCheckedModeBanner: false,
         builder: (context, child) {
           return ScrollConfiguration(
             // remove GlowingOverscrollIndicator
