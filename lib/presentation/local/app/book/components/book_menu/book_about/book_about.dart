@@ -1,12 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../../../../application/book/tracker_state_cubit.dart';
 import 'components/about_close.dart';
 import 'components/about_text.dart';
 import '../components/content_container.dart';
 
-Dialog aboutBookDialog(
+Dialog aboutBookDialog({
+  BuildContext bookContext,
   DocumentSnapshot book,
-) {
+}) {
+  // Create 'BookTrackerCubit' instance
+  BookTrackerCubit trackerCubit =
+      BlocProvider.of<BookTrackerCubit>(bookContext);
+
   return BookMenuContentContainer(
     child: Column(
       mainAxisSize: MainAxisSize.min,
@@ -32,11 +39,9 @@ Dialog aboutBookDialog(
           title: 'Published:',
           about: book['published'],
         ),
-        // TODO make pages reflect on changes in BookTracker
-        // I just need to pass state of the Cubit there
         AboutRichText(
           title: 'Pages:',
-          about: book['pages'].toString(),
+          about: trackerCubit.state.pages.toString(),
         ),
         BookAboutClose(),
       ],

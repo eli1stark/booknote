@@ -20,8 +20,6 @@ dependencies:
   flutter_launcher_icons: ^0.7.5
   # custom icons:
   font_awesome_flutter: ^8.8.1
-  # free network fonts:
-  google_fonts: ^1.1.0
   # automatic tool for resizing text:
   auto_size_text: ^2.1.0
   # custom spinners:
@@ -67,4 +65,7 @@ flutter:
     - family: Itim
       fonts:
         - asset: assets/fonts/Itim-Regular.ttf
+    - family: Suez One
+      fonts:
+        - asset: assets/fonts/SuezOne-Regular.ttf
 

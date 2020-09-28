@@ -4,7 +4,6 @@ import 'package:booknote/infrastructure/api/methods_api.dart';
 import 'package:booknote/infrastructure/database/database.dart';
 import 'package:booknote/presentation/global/components/loader.dart';
 import 'package:booknote/presentation/global/components/submit_button.dart';
-import 'package:booknote/presentation/local/app/bookshelf/bookshelf.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../../helpers.dart';
@@ -108,8 +107,7 @@ class _AddBookFormState extends State<AddBookForm> {
                 bookNote: null,
               );
 
-              // go to the Bookshelf page
-              Navigator.pushNamed(context, Bookshelf.routeName);
+              Navigator.pop(context);
             },
           ),
         ],
