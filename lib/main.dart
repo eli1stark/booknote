@@ -35,6 +35,7 @@ class Booknote extends StatelessWidget {
         theme: ThemeData(
           brightness: Brightness.light,
           fontFamily: 'Lato',
+          primaryColor: Colors.white,
           accentColor: Colors.grey,
         ),
         initialRoute: Controller.routeName,
