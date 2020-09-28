@@ -56,7 +56,10 @@ class _BookSheetState extends State<BookSheet> {
                           // I need to restrict the height to avoid errors
                           // noteState.document.length is the
                           // length of the note in terms of the NotusDocument
-                          height: noteState.document.length * 4.5,
+                          height: noteState.document.length < 20
+                          // fix UI bug with small length
+                              ? noteState.document.length * 10.0
+                              : noteState.document.length * 4.5,
                           width: double.infinity,
                           // Note that the editor requires special `ZefyrScaffold` widget
                           // to be one of its parents.

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class NavigationTitle extends StatelessWidget {
   NavigationTitle(
@@ -17,8 +16,8 @@ class NavigationTitle extends StatelessWidget {
       ),
       child: Text(
         title,
-        // TODO load font
-        style: GoogleFonts.suezOne(
+        style: TextStyle(
+          fontFamily: 'Suez One',
           fontSize: 40.0,
         ),
       ),

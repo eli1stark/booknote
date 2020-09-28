@@ -28,7 +28,10 @@ void onSelected({
   } else if (action == MenuActions.about) {
     showDialog(
       context: context,
-      builder: (_) => aboutBookDialog(book),
+      builder: (_) => aboutBookDialog(
+        bookContext: context,
+        book: book,
+      ),
     );
   } else if (action == MenuActions.move) {
     showDialog(

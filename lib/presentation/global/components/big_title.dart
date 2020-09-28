@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class BigTitle extends StatelessWidget {
   BigTitle({
@@ -21,7 +20,8 @@ class BigTitle extends StatelessWidget {
         ),
         child: Text(
           text,
-          style: GoogleFonts.suezOne(
+          style: TextStyle(
+            fontFamily: 'Suez One',
             fontSize: size,
             letterSpacing: 0.5,
           ),
