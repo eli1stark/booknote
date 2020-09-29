@@ -27,7 +27,7 @@ class CommonText extends StatelessWidget {
         ),
         // prevent Text overflow the "Add" button with Container width
         Container(
-          width: halfWidth ? size.width * 0.2 : size.width * 0.4,
+          width: halfWidth ? size.width * 0.2 : size.width * 0.35,
           child: AutoSizeText(
             text,
             maxLines: 1,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'domain/auth/user.dart';
 import 'infrastructure/auth/auth.dart';
@@ -19,6 +20,10 @@ class Booknote extends StatelessWidget {
   // This widget is the root of my application.
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     // uid goes down the Stream
     return StreamProvider<AppUser>.value(
       value: AuthService().user,
