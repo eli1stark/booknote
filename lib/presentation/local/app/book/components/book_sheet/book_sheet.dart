@@ -18,14 +18,9 @@ class BookSheet extends StatefulWidget {
 }
 
 class _BookSheetState extends State<BookSheet> {
-  // Zefyr editor like any other input field requires a focus node.
-  FocusNode focusNode;
-
   @override
   void initState() {
     super.initState();
-
-    focusNode = FocusNode();
 
     Future.delayed(Duration.zero, () {
       // Create 'BookNoteCubit' instance
@@ -48,34 +43,17 @@ class _BookSheetState extends State<BookSheet> {
             return BookSheetDecoration(
               child: ListView(
                 controller: scrollController,
-                children: <Widget>[
+                children: [
                   LittleBar(),
-                  (noteState == null || noteState.document.length == null)
+                  (noteState == null)
                       ? Loader()
                       : Container(
-                          // I need to restrict the height to avoid errors
-                          // noteState.document.length is the
-                          // length of the note in terms of the NotusDocument
-                          height: noteState.document.length < 20
-                          // fix UI bug with small length
-                              ? noteState.document.length * 10.0
-                              : noteState.document.length * 4.5,
-                          width: double.infinity,
-                          // Note that the editor requires special `ZefyrScaffold` widget
-                          // to be one of its parents.
-                          child: ZefyrScaffold(
-                            child: ZefyrEditor(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 15.0,
-                                vertical: 10.0,
-                              ),
-                              controller: noteState,
-                              focusNode: focusNode,
-                              mode: ZefyrMode.view,
-                              autofocus: false,
-                              // disable scrolling
-                              physics: NeverScrollableScrollPhysics(),
-                            ),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 15.0,
+                            vertical: 10.0,
+                          ),
+                          child: ZefyrView(
+                            document: noteState.document,
                           ),
                         ),
                 ],
