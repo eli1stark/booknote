@@ -14,4 +14,5 @@ Track your reading progress. Use your library across all your devices.
 ## Credits
 Illustration by <a href="http://www.saramaese.com/">Sara Maese</a> from <a href="https://icons8.com/">Icons8</a>
 
+(Pending Publication)
 [<img src="https://i.imgur.com/MXjiCOr.png" height="50">]()
