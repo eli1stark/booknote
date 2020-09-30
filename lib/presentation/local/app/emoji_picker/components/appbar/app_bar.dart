@@ -29,6 +29,7 @@ class EmojiPickerAppBar extends StatelessWidget {
     return AppBar(
       elevation: 1,
       backgroundColor: Colors.white,
+      leading: Container(),
       actions: [
         AppBarButton(
           text: 'Remove',
